@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:32:11 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/27 15:54:23 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/04 13:06:33 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	cleanup(t_cub *cub)
 		index++;
 	}
 	free(cub->map_data->map);
+	if (cub->mlx)
+		mlx_terminate(cub->mlx);
 	
 	// while (cub->map_data->map && *cub->map_data->map)
 	// {

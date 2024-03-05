@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/01 18:38:19 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/05 14:50:47 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,13 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include "../../MLX42/MLX42.h"
+# include <math.h>
 
 # pragma region define varriables
+
+# ifndef PI
+#  define PI 3.1415926
+# endif
 
 # ifndef INVALID_MAP_CONTENT
 #  define INVALID_MAP_CONTENT "Invalid map content"
@@ -71,7 +76,40 @@
 #  define WIN_HEIGHT 1000
 # endif
 
+# ifndef GRID_SIZE
+#  define GRID_SIZE 110
+# endif
+
+# ifndef MAX_FOV
+#  define MAX_FOV 10
+# endif
+
+# ifndef PLAYER_SIZE
+#  define PLAYER_SIZE 20
+# endif
+
+# ifndef ROTATE_SPEED
+#  define ROTATE_SPEED 6
+# endif
+
+# ifndef MOVE_SPEED
+#  define MOVE_SPEED 6
+# endif
+
 # pragma endregion
+
+typedef struct s_vec2
+{
+	double	x;
+	double	y;
+}	t_ve2;
+
+typedef struct s_game
+{
+	t_ve2	*player_pos;
+	double	angle;
+}	t_game;
+
 
 typedef struct s_map
 {
@@ -95,8 +133,16 @@ typedef struct s_cub
 	t_map	*map_data;
 	mlx_t	*mlx;
 	mlx_image_t	*img;
+	t_game	*game;
 	int		fd;
 }	t_cub;
+
+typedef struct	s_rayhit
+{
+	bool	hit_target;
+	double	hit_distance;
+}	t_rayhit;
+
 
 // #################### Cleanup #########################
 void	clean_exit(t_cub *cub, char *error, int code);
@@ -146,8 +192,20 @@ int		str_len(char *str1, char *str2);
 
 
 
+double	ang_to_rad(double angle);
+double	clamp_angle(double angle);
+void	calc_direction(const t_ve2 *st_pos, t_ve2 *res, double dis, double angle);
+// bool	limits_check(t_map *map, double g_x, double g_y);
+t_rayhit	ray_cast(t_cub *cub, double angle, char target);
+
+// debug
+void	draw_line(t_cub *cub, t_ve2 start, double len, int color, int line_size, double angle);
 
 
 void	start_game(t_cub *cub, t_map *map);
+void	register_events(t_cub *cub);
+void	draw_map(t_cub *cub, t_map *map);
+void	draw_player(t_cub *cub, t_map *map);
+
 
 #endif
