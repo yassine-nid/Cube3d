@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 13:52:48 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/05 11:52:31 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/05 15:13:03 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	draw_grid(t_cub *cub, int x, int y, int color)
 	}
 }
 
-/// @brief draws the map gicing each node a grid size
+/// @brief draws the map giving each node a grid size
 void	draw_map(t_cub *cub, t_map *map)
 {
 	int	y;
@@ -54,7 +54,8 @@ void	draw_map(t_cub *cub, t_map *map)
 				color = 0x56B7EF;
 			if (map->map[y][x] == ' ')
 				color = 0xB5CA00;
-			draw_grid(cub, x, y, color);
+			if (0)
+				draw_grid(cub, x, y, color);
 		}
 	}
 }
