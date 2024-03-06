@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/05 14:50:47 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/06 08:08:48 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@
 # endif
 
 # ifndef MOVE_SPEED
-#  define MOVE_SPEED 6
+#  define MOVE_SPEED 1
 # endif
 
 # pragma endregion
@@ -141,6 +141,8 @@ typedef struct	s_rayhit
 {
 	bool	hit_target;
 	double	hit_distance;
+	t_ve2	point;
+	char	target;
 }	t_rayhit;
 
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_raycaster.c                                   :+:      :+:    :+:   */
+/*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 12:59:28 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/05 15:06:47 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/06 07:39:42 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ static t_rayhit	single_ray(t_cub *cub, double angle, bool is_ver, char target)
 		if (!post_ray_check(cub->map_data, &result_move, &rayhit, target))
 			break ;
 	}
+	rayhit.target = target;
+	rayhit.point = result_move;
 	return (rayhit);
 }
 

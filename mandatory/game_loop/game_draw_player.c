@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:18:22 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/05 15:59:37 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/06 08:06:54 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,21 +67,30 @@ void	draw_player(t_cub *cub, t_map *map)
 	{
 		t_rayhit hit = ray_cast(cub, angle, WALL);
 
-		int y_start = 0;
-		int	y_max = WIN_HEIGHT;
+
+		// int y_start = 0;
+		// int	y_max = WIN_HEIGHT;
 		
-		int remover = hit.hit_distance / 10;
-		if (remover <= 0)
-			remover = 0;
-		if (remover > 1300)
-			remover = 1300;
-		remover += 100;
+		// int remover = hit.hit_distance / 10;
+		// if (remover <= 0)
+		// 	remover = 0;
+		// if (remover > 1300)
+		// 	remover = 1300;
+		// remover += 100;
 		
-		y_start += remover;
-		y_max -= remover;
+		// y_start += remover;
+		// y_max -= remover;
 		
-		
-		for (int y = y_start; y < y_max; y++)
+		double wall_height = floor((WIN_HEIGHT / 2) / hit.hit_distance);
+		printf("Wall height %f\n", wall_height);
+		int from = (WIN_HEIGHT / 2) - wall_height;
+		int to = (WIN_HEIGHT / 2) + wall_height;
+
+		if (from <= 0)
+			from = 0;
+		if (to <= 0)
+			to = 0;
+		for (int y = from; y < to; y++)
 		{
 			for (int x = 0; x < pixel_per_ray; x++)
 			{
