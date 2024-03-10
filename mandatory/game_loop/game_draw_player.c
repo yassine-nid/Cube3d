@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:18:22 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/06 08:06:54 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/10 08:47:35 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,10 @@ void	draw_player(t_cub *cub, t_map *map)
 
 	for (int i = 0; i < 60; i++)
 	{
+		// do a single ray
 		t_rayhit hit = ray_cast(cub, angle, WALL);
 
 
-		// int y_start = 0;
-		// int	y_max = WIN_HEIGHT;
-		
-		// int remover = hit.hit_distance / 10;
-		// if (remover <= 0)
-		// 	remover = 0;
-		// if (remover > 1300)
-		// 	remover = 1300;
-		// remover += 100;
-		
-		// y_start += remover;
-		// y_max -= remover;
 		
 		double wall_height = floor((WIN_HEIGHT / 2) / hit.hit_distance);
 		printf("Wall height %f\n", wall_height);
@@ -103,17 +92,7 @@ void	draw_player(t_cub *cub, t_map *map)
 		x_tss += pixel_per_ray;
 		
 		
-		
-
-
-		
-		// int color = 0xF34D8A;
-		// draw_line(cub, *cub->game->player_pos, ray_to_draw.hit_distance, color, 5, angle);
-
-
-
-
-		
+		// increase angle
 		angle++;
 		angle = clamp_angle(angle);
 	}
