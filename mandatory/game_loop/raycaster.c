@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 12:59:28 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/10 14:39:22 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 02:25:52 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static t_rayhit	single_ray(t_cub *cub, double angle, bool is_ver, char target)
 	result_move.y = cub->game->player_pos->y;
 	rayhit.hit_target = false;
 	rayhit.hit_distance = 0;
+	rayhit.is_vertical = is_ver;
 	while (++fov < MAX_FOV)
 	{
 		ray_distance = get_ray_distance(cub, is_ver, &result_move, angle);

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:18:22 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/13 01:48:25 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 02:31:08 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,11 @@ void	draw_stripe(uint32_t len, uint32_t start_pos, uint32_t end_pos, int color, 
 	}
 }
 
+unsigned int	test_combine_rgb(unsigned int r, unsigned int g, unsigned int b)
+{
+	return ((int)r << 24 | (int)g << 16 |  (int)b << 8 | (int)255);
+}
+
 void	draw_player(t_cub *cub, t_map *map)
 {
 	(void)map;
@@ -153,16 +158,19 @@ void	draw_player(t_cub *cub, t_map *map)
 			if (hit.hit_target == true)
 			{
 				color = 0xFFFFFF;
-				len = cub->game_img->height / 2;
-				// if (hit.hit_distance <= 200)
-				// 	color = 0x0FF78B;
+				// color = test_combine_rgb(0, 0, 230);
+				// len = cub->game_img->height / 2;
+				if (!hit.is_vertical)
+					// color = test_combine_rgb(0, 0, 178);
+					color = 0xFFFFF0;
 				// len -= hit.hit_distance;
 				// len = floor(cub->game_img->height / hit.hit_distance);
 				// len = floor(cub->game_img->height / hit.hit_distance);
 				// len *= len / (len + hit.hit_distance * 4);
 				if (hit.hit_distance > 0)
 				{
-					len /= (hit.hit_distance * 0.01);
+					len /= (hit.hit_distance * 0.03);
+					len = (64 * 320) / hit.hit_distance;
 					if (len >= cub->game_img->height / 2)
 						len = cub->game_img->height / 2;
 				}

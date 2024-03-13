@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/10 14:42:22 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 02:25:33 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct	s_rayhit
 	double	hit_distance;
 	t_ve2	point;
 	char	target;
+	bool	is_vertical;
 }	t_rayhit;
 
 
