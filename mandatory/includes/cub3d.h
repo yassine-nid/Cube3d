@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/13 20:10:29 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 21:59:55 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,22 +92,27 @@ typedef struct s_cub
 	int			fd;
 }	t_cub;
 
-// #################### Cleanup #########################
+#pragma region Cleanup
+
 void	clean_exit(t_cub *cub, char *error, int code);
 void	cleanup(t_cub *cub);
 
-// ################## Utils #############################
+#pragma endregion
+
+#pragma region Utils
+
 int		ft_putstr_fd(char *s, int fd);
 bool	is_valid_extention(const char *src, const char *ne);
 bool	ft_isspace(char c);
 int		ft_strlen(const char *str);
 char	*ft_strdup(const char *s1);
-// Split
 char	**ft_split(char const *s, char c);
-// Atoi
 int		ft_atoi(const char *str);
 
-// ################## Parser ############################
+#pragma endregion
+
+#pragma region Parser
+
 void	do_parse(t_cub *cub, int argc, char *argv[]);
 void	varriables_parse(t_cub *cub, t_map *map, char *line, char *argv[]);
 void	map_parse(t_cub *cub, t_map *map, char *argv[]);
@@ -125,9 +130,14 @@ bool	check_angles(t_map *map, int x, int y);
 
 void	colors_parse(t_cub *cub, t_map *map);
 
-// ################## Get next line ####################
+#pragma endregion
+
+#pragma region Get_next_line
+
 char	*get_next_line(int fd);
 char	*append(char *src, char *dst, int *new_l);
 int		str_len(char *str1, char *str2);
+
+#pragma endregion
 
 #endif
