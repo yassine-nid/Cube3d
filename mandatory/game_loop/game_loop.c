@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 18:25:02 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/13 00:19:31 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 03:18:07 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ static void	init_mlx(t_cub *cub, int m_y, int m_x)
 		clean_exit(cub, NULL, errno);
 	if (mlx_image_to_window(cub->mlx, cub->game_img, 0, 0) < 0)
         clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+
+
+	cub->test_texture = mlx_load_png("./test_png.png");
+	if (!cub->test_texture)
+		clean_exit(cub, NULL, errno);
+	
+	
 }
 
 void	start_game(t_cub *cub, t_map *map)

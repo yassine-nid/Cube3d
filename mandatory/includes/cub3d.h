@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/13 02:25:33 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 02:59:46 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ typedef struct s_cub
 	int			grid_y;
 	t_game		*game;
 	int			fd;
+
+	mlx_texture_t	*test_texture;
 }	t_cub;
 
 typedef struct	s_rayhit
