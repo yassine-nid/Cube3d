@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:33:48 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/01 16:44:20 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:18:45 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,6 @@ int	ft_strlen(const char *str)
 	while (str && str[len])
 		len++;
 	return (len);
-}
-
-bool	ft_isspace(char c)
-{
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
 }
 
 static void	*ft_memcpy(void *dst, const void *src, size_t n)

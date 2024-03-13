@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 07:31:42 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/01 14:06:02 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 19:50:47 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	alloc_init_map(t_cub *cub, t_map *map)
 		map->map[index++] = NULL;
 }
 
-/// @brief checks left and right of a node to maek sure it has a valid type
+/// @brief checks left and right of a node to make sure it has a valid type
 bool	check_x(char **map, int len, int x, int y)
 {
 	int	tmp_x;

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:50:06 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/01 13:50:54 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:00:31 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,18 @@ static void	trim_assign_var(t_cub *cub, char *line, char **var)
 	while (line[index] && ft_isspace(line[index]))
 		index++;
 	*var = ft_strdup(line + index);
-	if (!*var)
-		return (free(line), clean_exit(cub, NULL, errno));
 	free(line);
+	if (!*var)
+		return (clean_exit(cub, NULL, errno));
+	index = -1;
+	while ((*var)[++index])
+	{
+		if ((*var)[index] == '\n' && !(*var)[index + 1])
+		{
+			(*var)[index] = '\0';
+			break ;
+		}
+	}
 }
 
 /// @brief checks if the line starts with (cmp), and puts it in in the var

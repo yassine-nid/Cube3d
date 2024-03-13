@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:06:28 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/01 17:45:57 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:15:20 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /// @brief combines the provided Red, Green, Blue channels into a single color
 static unsigned int	combine_rgb(unsigned int r, unsigned int g, unsigned int b)
 {
-	return ((int)r << 24 | (int)g << 16 |  (int)b << 8 | (int)255);
+	return ((int)r << 24 | (int)g << 16 | (int)b << 8 | (int)255);
 }
 
 static void	clean_splitted(char **splitted)

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 01:13:29 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/01 15:45:01 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:17:19 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	ft_atoi(const char *str)
 
 	nb = 0;
 	isnegative = 1;
-	while (*str && (*str == ' ' || *str == '\t' || *str == '\n' 
-			|| *str == '\r' || *str == '\v' || *str == '\f'))
+	while (*str && ft_isspace(*str))
 		str++;
 	if (*str == '-')
 	{

@@ -6,26 +6,21 @@
 #    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 08:51:59 by yzirri            #+#    #+#              #
-#    Updated: 2024/03/10 13:52:13 by yzirri           ###   ########.fr        #
+#    Updated: 2024/03/13 20:18:22 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 OBJ_DIR = objects
-LIBMLX	:= ./MLX42
-LIBS = ./MLX42/libmlx42.a -L"/Users/$(USER)/.brew/Cellar/glfw/" -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -framework OpenGL -framework AppKit
-
 NAME = cub3D
 
-SRC = mandatory/main/main.c mandatory/cleanup/clean_exits.c mandatory/utils/str_utils.c \
-	mandatory/parser/parser.c mandatory/get_next_line/get_next_line.c \
-	mandatory/get_next_line/get_next_line_utils.c mandatory/parser/parser_varriables.c \
-	mandatory/parser/parser_map.c mandatory/parser/parser_map_utils.c \
-	mandatory/parser/parser_utils.c mandatory/utils/ft_split.c mandatory/parser/parser_colors.c \
-	mandatory/utils/ft_atoi.c mandatory/game_loop/game_loop.c mandatory/game_loop/game_utils.c \
-	mandatory/game_loop/game_events.c \
-	mandatory/game_loop/game_draw_player.c mandatory/game_loop/raycaster.c
+SRC = bonus/main/main.c bonus/cleanup/clean_exits.c bonus/utils/str_utils.c \
+	bonus/parser/parser.c bonus/get_next_line/get_next_line.c \
+	bonus/get_next_line/get_next_line_utils.c bonus/parser/parser_varriables.c \
+	bonus/parser/parser_map.c bonus/parser/parser_map_utils.c \
+	bonus/parser/parser_utils.c bonus/utils/ft_split.c bonus/parser/parser_colors.c \
+	bonus/utils/ft_atoi.c bonus/utils/str_utils2.c
 
 OBJ = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
 DEPS = $(patsubst %.c, $(OBJ_DIR)/%.d, $(SRC))
@@ -35,9 +30,9 @@ NC = '\e[0m'
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBS)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-$(OBJ_DIR)/%.o : %.c mandatory/includes/cub3d.h MLX42/MLX42.h
+$(OBJ_DIR)/%.o : %.c bonus/includes/cub3d.h
 	mkdir -p $(dir $@)
 	printf $(HBLU)"[%-37s] 🕝 \r"$(NC) "Compiling $(notdir $@)"
 	$(CC) $(CFLAGS) -o $@ -c $<

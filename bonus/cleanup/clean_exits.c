@@ -6,11 +6,27 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:32:11 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/10 13:52:50 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:09:30 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+static void	cleanup_map(t_map *map)
+{
+	int	index;
+
+	index = -1;
+	while (++index < map->map_size)
+		free(map->map[index]);
+	free(map->map);
+	free(map->tx_north);
+	free(map->tx_south);
+	free(map->tx_west);
+	free(map->tx_east);
+	free(map->flor_color);
+	free(map->ceiling_color);
+}
 
 static void	log_error(char *error)
 {
@@ -26,24 +42,9 @@ static void	log_error(char *error)
 
 void	cleanup(t_cub *cub)
 {
-	free(cub->map_data->ceiling_color);
-	free(cub->map_data->flor_color);
-	free(cub->map_data->tx_east);
-	free(cub->map_data->tx_north);
-	free(cub->map_data->tx_south);
-	free(cub->map_data->tx_west);
+	cleanup_map(cub->map_data);
 	if (cub->fd != -1)
 		close(cub->fd);
-	
-	int index = -1;
-	while (++index < cub->map_data->map_size)
-		free(cub->map_data->map[index]);
-	free(cub->map_data->map);
-	
-	if (cub->game_img)
-		mlx_delete_image(cub->mlx, cub->game_img);
-	if (cub->mlx)
-		mlx_terminate(cub->mlx);
 }
 
 void	clean_exit(t_cub *cub, char *error, int code)
