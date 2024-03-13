@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 13:19:03 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/10 13:46:59 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 03:51:47 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	key_hook(mlx_key_data_t keydata, void* param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
 		game->angle  -= ROTATE_SPEED;
 	game->angle = clamp_angle(game->angle);
+	
 	calc_direction(game->player_pos, game->player_pos, move_amount, game->angle);
 }
 

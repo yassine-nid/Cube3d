@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:18:22 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/13 03:40:58 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 03:47:15 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,19 @@ void	draw_player(t_cub *cub, t_map *map)
 }
 */
 
+void	draw_sky_and_floor(t_cub *cub, t_map *map)
+{
+	// sky
+	for (int y = 0; y < cub->win_height / 2; y++)
+		for (int x = 0; x < cub->win_width; x++)
+			mlx_put_pixel(cub->game_img, x, y, map->c_int_color);
+	
+	// floor
+	for (int y = cub->win_height / 2; y < cub->win_height; y++)
+		for (int x = 0; x < cub->win_width; x++)
+			mlx_put_pixel(cub->game_img, x, y, map->f_int_color);
+}
+
 void	draw_stripe(uint32_t len, uint32_t start_pos, uint32_t end_pos, int color, mlx_image_t *img)
 {
 	if (start_pos < 0 || end_pos < 0)
@@ -129,10 +142,6 @@ void	draw_stripe(uint32_t len, uint32_t start_pos, uint32_t end_pos, int color, 
 	}
 }
 
-unsigned int	test_combine_rgb(unsigned int r, unsigned int g, unsigned int b)
-{
-	return ((int)r << 24 | (int)g << 16 |  (int)b << 8 | (int)255);
-}
 
 void	draw_player(t_cub *cub, t_map *map)
 {
@@ -158,9 +167,7 @@ void	draw_player(t_cub *cub, t_map *map)
 	
 	if (1)
 	{
-		for (uint32_t y = 0; y < cub->game_img->height; y++)
-			for (uint32_t x = 0; x < cub->game_img->width; x++)
-				mlx_put_pixel(cub->game_img, x, y, 0xF50505);
+		draw_sky_and_floor(cub, map);
 			
 		double angle = cub->game->angle;
 		int	ray_count = (int)cub->game_img->width;
