@@ -6,7 +6,7 @@
 #    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 08:51:59 by yzirri            #+#    #+#              #
-#    Updated: 2024/03/05 15:12:15 by yzirri           ###   ########.fr        #
+#    Updated: 2024/03/10 13:52:13 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC = mandatory/main/main.c mandatory/cleanup/clean_exits.c mandatory/utils/str_
 	mandatory/parser/parser_map.c mandatory/parser/parser_map_utils.c \
 	mandatory/parser/parser_utils.c mandatory/utils/ft_split.c mandatory/parser/parser_colors.c \
 	mandatory/utils/ft_atoi.c mandatory/game_loop/game_loop.c mandatory/game_loop/game_utils.c \
-	mandatory/game_loop/game_events.c mandatory/game_loop/game_draw_map.c \
+	mandatory/game_loop/game_events.c \
 	mandatory/game_loop/game_draw_player.c mandatory/game_loop/raycaster.c
 
 OBJ = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))

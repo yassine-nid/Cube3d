@@ -6,20 +6,20 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 12:59:28 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/06 07:39:42 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/10 14:39:22 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
 /// @brief checks done after the raycast to validate the new point
-static bool	post_ray_check(t_map *map, t_ve2 *pos, t_rayhit *hit, char target)
+static bool	post_ray_check(t_cub *cub, t_map *map, t_ve2 *pos, t_rayhit *hit, char target)
 {
 	int	x;
 	int	y;
 
-	x = (int)(pos->x / GRID_SIZE);
-	y = (int)(pos->y / GRID_SIZE);
+	x = (int)(pos->x / cub->grid_x);
+	y = (int)(pos->y / cub->grid_y);
 	if (x >= map->longest_line || x < 0)
 		return (false);
 	if (y >= map->map_size || y < 0)
@@ -34,22 +34,22 @@ static bool	post_ray_check(t_map *map, t_ve2 *pos, t_rayhit *hit, char target)
 
 /// @brief calculate the next grid edge distance
 /// in the given direction using an angle
-static double	get_ray_distance(bool is_verti, t_ve2 *res_move, double angle)
+static double	get_ray_distance(t_cub *cub, bool is_verti, t_ve2 *res_move, double angle)
 {
 	double	ray_distance;
 	double	fmod_xy;
 
 	if (is_verti)
 	{
-		fmod_xy = fmod(res_move->x, GRID_SIZE);
+		fmod_xy = fmod(res_move->x, cub->grid_x);
 		if (angle > 270 || angle < 90)
-			ray_distance = (GRID_SIZE - fmod_xy) / cos(ang_to_rad(360 - angle));
+			ray_distance = (cub->grid_x - fmod_xy) / cos(ang_to_rad(360 - angle));
 		else
 			ray_distance = (fmod_xy) / cos(ang_to_rad(180 - angle));
 		return (ray_distance);
 	}
-	fmod_xy = fmod(res_move->y, GRID_SIZE);
-	ray_distance = (GRID_SIZE - fmod_xy) / cos(ang_to_rad(90 + angle));
+	fmod_xy = fmod(res_move->y, cub->grid_y);
+	ray_distance = (cub->grid_y - fmod_xy) / cos(ang_to_rad(90 + angle));
 	if (angle >= 0 && angle <= 180)
 		ray_distance = fmod_xy / cos(ang_to_rad(90 - angle));
 	return (ray_distance);
@@ -87,11 +87,11 @@ static t_rayhit	single_ray(t_cub *cub, double angle, bool is_ver, char target)
 	rayhit.hit_distance = 0;
 	while (++fov < MAX_FOV)
 	{
-		ray_distance = get_ray_distance(is_ver, &result_move, angle);
+		ray_distance = get_ray_distance(cub, is_ver, &result_move, angle);
 		calc_direction(&result_move, &result_move, ray_distance, angle);
 		get_correct_grid(&result_move, is_ver, angle);
 		rayhit.hit_distance += ray_distance;
-		if (!post_ray_check(cub->map_data, &result_move, &rayhit, target))
+		if (!post_ray_check(cub, cub->map_data, &result_move, &rayhit, target))
 			break ;
 	}
 	rayhit.target = target;

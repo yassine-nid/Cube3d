@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 12:55:13 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/05 14:34:08 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/10 10:30:45 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ double	clamp_angle(double angle)
 }
 
 /// @brief for debugging only
-void	draw_line(t_cub *cub, t_ve2 start, double len, int color, int line_size, double angle)
+void	draw_line(t_ve2 start, double len, int color, int line_size, double angle, mlx_image_t *img)
 {
 	t_ve2	result;
 
@@ -48,12 +48,12 @@ void	draw_line(t_cub *cub, t_ve2 start, double len, int color, int line_size, do
 		calc_direction(&start, &result, line_len, angle);
 		if (result.x < 0 || result.y < 0)
 			break ;
-		if (result.x >= WIN_WIDTH || result.y >= WIN_HEIGHT)
+		if (result.x >= img->width || result.y >= img->height)
 			break ;
 		for (int extra_width = -(line_size / 2); extra_width < line_size / 2; extra_width++)
 		{
 			int x_wid = result.x + extra_width;
-			mlx_put_pixel(cub->img, x_wid, result.y, color);
+			mlx_put_pixel(img, x_wid, result.y, color);
 		}
 	}
 }

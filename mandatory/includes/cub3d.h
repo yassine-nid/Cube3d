@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/06 08:08:48 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/10 14:42:22 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,8 @@
 #  define EAST 'E'
 # endif
 
-# ifndef WIN_WIDTH
-#  define WIN_WIDTH 1780
-# endif
-
-# ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 1000
-# endif
-
-# ifndef GRID_SIZE
-#  define GRID_SIZE 110
-# endif
-
 # ifndef MAX_FOV
 #  define MAX_FOV 10
-# endif
-
-# ifndef PLAYER_SIZE
-#  define PLAYER_SIZE 20
 # endif
 
 # ifndef ROTATE_SPEED
@@ -93,7 +77,7 @@
 # endif
 
 # ifndef MOVE_SPEED
-#  define MOVE_SPEED 1
+#  define MOVE_SPEED 4
 # endif
 
 # pragma endregion
@@ -130,11 +114,15 @@ typedef struct s_map
 
 typedef struct s_cub
 {
-	t_map	*map_data;
-	mlx_t	*mlx;
-	mlx_image_t	*img;
-	t_game	*game;
-	int		fd;
+	t_map		*map_data;
+	mlx_t		*mlx;
+	mlx_image_t	*game_img;
+	int			win_height;
+	int			win_width;
+	int			grid_x;
+	int			grid_y;
+	t_game		*game;
+	int			fd;
 }	t_cub;
 
 typedef struct	s_rayhit
@@ -201,8 +189,7 @@ void	calc_direction(const t_ve2 *st_pos, t_ve2 *res, double dis, double angle);
 t_rayhit	ray_cast(t_cub *cub, double angle, char target);
 
 // debug
-void	draw_line(t_cub *cub, t_ve2 start, double len, int color, int line_size, double angle);
-
+void	draw_line(t_ve2 start, double len, int color, int line_size, double angle, mlx_image_t *img);
 
 void	start_game(t_cub *cub, t_map *map);
 void	register_events(t_cub *cub);

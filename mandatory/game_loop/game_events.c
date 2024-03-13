@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 13:19:03 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/05 15:09:42 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/10 13:46:59 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void	loop_hook(void* param)
 	t_cub *cub = (t_cub *)param;
 	t_map *map = cub->map_data;
 
-	draw_map(cub, map);
 	draw_player(cub, map);
 }
 

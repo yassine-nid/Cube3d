@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:48:47 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/04 13:01:52 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/10 13:52:30 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	init_vars(t_cub *cub, t_map *map)
 	map->map_size = 0;
 	map->start_location_type = '\0';
 	cub->game = NULL;
+	cub->game_img = NULL;
+	cub->mlx = NULL;
 }
 
 void	leak_detector()

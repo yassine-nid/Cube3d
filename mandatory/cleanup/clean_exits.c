@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:32:11 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/04 13:06:33 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/10 13:52:50 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,15 @@ void	cleanup(t_cub *cub)
 	if (cub->fd != -1)
 		close(cub->fd);
 	
-	int index = 0;
-	while (index < cub->map_data->map_size)
-	{
+	int index = -1;
+	while (++index < cub->map_data->map_size)
 		free(cub->map_data->map[index]);
-		index++;
-	}
 	free(cub->map_data->map);
+	
+	if (cub->game_img)
+		mlx_delete_image(cub->mlx, cub->game_img);
 	if (cub->mlx)
 		mlx_terminate(cub->mlx);
-	
-	// while (cub->map_data->map && *cub->map_data->map)
-	// {
-	// 	free(*cub->map_data->map);
-	// 	cub->map_data->map++;
-	// }
-	// free(cub->map_data->map);
 }
 
 void	clean_exit(t_cub *cub, char *error, int code)

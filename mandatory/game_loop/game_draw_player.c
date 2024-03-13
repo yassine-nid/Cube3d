@@ -6,12 +6,13 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:18:22 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/10 08:47:35 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 01:48:25 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
 static void	do_draw_player(t_cub *cub, t_map *map, t_game *game)
 {
 	int	x;
@@ -90,6 +91,179 @@ void	draw_player(t_cub *cub, t_map *map)
 			}
 		}
 		x_tss += pixel_per_ray;
+		
+		
+		// increase angle
+		angle++;
+		angle = clamp_angle(angle);
+	}
+	
+}
+*/
+
+void	draw_stripe(uint32_t len, uint32_t start_pos, uint32_t end_pos, int color, mlx_image_t *img)
+{
+	if (start_pos < 0 || end_pos < 0 || start_pos > img->width
+		|| end_pos > img->width || len > (img->height / 2))
+	{
+		printf("outside range\n");
+		return ;
+	}
+	
+	while (start_pos <= end_pos)
+	{
+		for (uint32_t y = (img->height / 2) - len; y < ((img->height / 2) + len); y++)
+		{
+			mlx_put_pixel(img, start_pos, y, color);
+		}
+		start_pos++;
+	}
+}
+
+void	draw_player(t_cub *cub, t_map *map)
+{
+	(void)map;
+
+	if (1)
+	{
+		for (uint32_t y = 0; y < cub->game_img->height; y++)
+			for (uint32_t x = 0; x < cub->game_img->width; x++)
+				mlx_put_pixel(cub->game_img, x, y, 0xF50505);
+			
+		double angle = cub->game->angle;
+		
+		angle += 30;
+		angle = clamp_angle(angle);
+		uint32_t len = 100;
+		double stripe_size = cub->game_img->width / 60;
+		int color = 0;
+		
+		// draw strips
+		for (int i = 0; i <= 60; i++)
+		{
+			t_rayhit hit = ray_cast(cub, angle, WALL);
+			
+			// hit.hit_distance = sqrt(pow(cub->game->player_pos->x - hit.point.x, 2) + pow(cub->game->player_pos.y- hit.point.y, 2));
+			
+			// hit.hit_distance = hit.hit_distance * cos(ang_to_rad(angle) - ang_to_rad(cub->game->angle));
+			double rrrrang = clamp_angle(angle - cub->game->angle);
+			hit.hit_distance = hit.hit_distance * cos(ang_to_rad(rrrrang));
+
+			
+			if (hit.hit_target == true)
+			{
+				color = 0xFFFFFF;
+				len = cub->game_img->height / 2;
+				// if (hit.hit_distance <= 200)
+				// 	color = 0x0FF78B;
+				// len -= hit.hit_distance;
+				// len = floor(cub->game_img->height / hit.hit_distance);
+				// len = floor(cub->game_img->height / hit.hit_distance);
+				// len *= len / (len + hit.hit_distance * 4);
+				if (hit.hit_distance > 0)
+				{
+					len /= (hit.hit_distance * 0.01);
+					if (len >= cub->game_img->height / 2)
+						len = cub->game_img->height / 2;
+				}
+				
+				if (cub->game->angle == angle)
+					printf("%f\n", hit.hit_distance);
+			}
+			else
+			{
+				color = 0;
+				len = 0;
+			}
+			int	stripe_start_pos = i * stripe_size;
+			
+			draw_stripe(len, stripe_start_pos, stripe_start_pos + stripe_size, color, cub->game_img);
+			angle--;
+			angle = clamp_angle(angle);
+		}
+		
+		
+		return ;
+	}
+
+
+	
+	if (1)
+	{
+		for (uint32_t y = 0; y < cub->game_img->height; y++)
+		{
+			for (uint32_t x = 0; x < cub->game_img->width; x++)
+			{
+				int	player_size = 10;
+				
+				int color = 0xFFFFFF;
+				if (map->map[y / cub->grid_y][x / cub->grid_x] == '1')
+					color = 0x1C80F2;
+				if (y >= cub->game->player_pos->y - player_size
+				&& y <= cub->game->player_pos->y + player_size
+				&& x >= cub->game->player_pos->x - player_size
+				&& x <= cub->game->player_pos->x + player_size)
+					color = 0xF50505;
+				mlx_put_pixel(cub->game_img, x, y, color);
+			}
+		}
+
+		double angle = cub->game->angle;
+		angle -= 30;
+		angle = clamp_angle(angle);
+
+		for (int i = 0; i < 60; i++)
+		{
+			t_rayhit hit = ray_cast(cub, angle, WALL);
+			draw_line(*cub->game->player_pos, hit.hit_distance, 0xF50505, 8, angle, cub->game_img);
+			angle++;
+			angle = clamp_angle(angle);
+		}
+		
+		return ;
+	}
+	
+	for (uint32_t y = 0; y < cub->game_img->height; y++)
+		for (uint32_t x = 0; x < cub->game_img->width; x++)
+			mlx_put_pixel(cub->game_img, x, y, 0xF50505);
+	
+
+	double angle = cub->game->angle;
+	
+	angle -= 30;
+	angle = clamp_angle(angle);
+
+	int pixel_per_width = cub->win_width / 60;
+
+	int current_x = 0;
+	for (int i = 0; i < 60; i++)
+	{
+		// do a single ray
+		t_rayhit hit = ray_cast(cub, angle, WALL);
+
+		//draw_line(*cub->game->player_pos, hit.hit_distance, 0xF50505, 8, angle, cub->game_img);
+		
+		double wall_height = floor((cub->win_height / 2) / hit.hit_distance);
+		int from = (cub->win_height / 2) - wall_height;
+		int to = (cub->win_height / 2) + wall_height;
+
+		if (from <= 0)
+			from = 0;
+		if (to <= 0)
+			to = 0;
+		for (int y = from; y < to; y++)
+		{
+			for (int x = 0; x < pixel_per_width; x++)
+			{
+				if (hit.hit_target)
+					mlx_put_pixel(cub->game_img, current_x + current_x, y, 0x1C80F2);
+				else
+					mlx_put_pixel(cub->game_img, current_x + current_x, y, 0xFFFFFF);
+				
+			}
+			// mlx_put_pixel(cub->game_img, 5, y, 0xFFFFFF);
+		}
+		current_x += pixel_per_width;
 		
 		
 		// increase angle
