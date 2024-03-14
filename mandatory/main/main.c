@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:48:47 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/13 20:14:52 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/13 22:39:28 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,19 @@ static void	init_map(t_map *map)
 	map->start_location_type = '\0';
 }
 
-static void	init(t_cub *cub, t_map *map)
+static void	init_game(t_game *game)
+{
+	game->game_img = NULL;
+	game->mlx = NULL;
+}
+
+static void	init(t_cub *cub, t_map *map, t_game *game)
 {
 	init_map(map);
+	init_game(game);
 	cub->fd = -1;
 	cub->map_data = map;
+	cub->game = game;
 }
 
 void	leak_detector(void)
@@ -45,17 +53,19 @@ int	main(int argc, char *argv[])
 {
 	t_cub	cub;
 	t_map	map;
+	t_game	game;
 
-	atexit(leak_detector);
-	init(&cub, &map);
+	// atexit(leak_detector);
+	init(&cub, &map, &game);
 	do_parse(&cub, argc, argv);
-	printf("<NO>: [%s]\n", map.tx_north);
-	printf("<SO>: [%s]\n", map.tx_south);
-	printf("<WE>: [%s]\n", map.tx_west);
-	printf("<EA>: [%s]\n", map.tx_east);
-	printf("<F>: [%s]\n", map.flor_color);
-	printf("<C>: [%s]\n", map.ceiling_color);
-	printf("<First Line>: [%d]\n", map.map_start_index);
+	do_game(&cub);
+	// printf("<NO>: [%s]\n", map.tx_north);
+	// printf("<SO>: [%s]\n", map.tx_south);
+	// printf("<WE>: [%s]\n", map.tx_west);
+	// printf("<EA>: [%s]\n", map.tx_east);
+	// printf("<F>: [%s]\n", map.flor_color);
+	// printf("<C>: [%s]\n", map.ceiling_color);
+	// printf("<First Line>: [%d]\n", map.map_start_index);
 	cleanup(&cub);
 	return (EXIT_SUCCESS);
 }

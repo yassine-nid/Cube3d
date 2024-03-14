@@ -6,7 +6,7 @@
 #    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 08:51:59 by yzirri            #+#    #+#              #
-#    Updated: 2024/03/13 21:53:49 by yzirri           ###   ########.fr        #
+#    Updated: 2024/03/14 00:42:11 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ NAME_BONUS = cub3D_bonus
 OBJ_DIR_BONUS = objects_bonus
 
 SRC_BONUS = bonus/main/main.c bonus/cleanup/clean_exits.c bonus/utils/str_utils.c \
-	bonus/parser/parser.c bonus/get_next_line/get_next_line.c \
+#	bonus/parser/parser.c bonus/get_next_line/get_next_line.c \
 	bonus/get_next_line/get_next_line_utils.c bonus/parser/parser_varriables.c \
 	bonus/parser/parser_map.c bonus/parser/parser_map_utils.c \
 	bonus/parser/parser_utils.c bonus/utils/ft_split.c bonus/parser/parser_colors.c \
@@ -36,13 +36,16 @@ OBJ_BONUS = $(patsubst %.c, $(OBJ_DIR_BONUS)/%.o, $(SRC_BONUS))
 
 NAME = cub3D
 OBJ_DIR_MANDATORY = objects_mandatory
-
+	
 SRC_MANDATORY = mandatory/main/main.c mandatory/cleanup/clean_exits.c mandatory/utils/str_utils.c \
 	mandatory/parser/parser.c mandatory/get_next_line/get_next_line.c \
 	mandatory/get_next_line/get_next_line_utils.c mandatory/parser/parser_varriables.c \
 	mandatory/parser/parser_map.c mandatory/parser/parser_map_utils.c \
 	mandatory/parser/parser_utils.c mandatory/utils/ft_split.c mandatory/parser/parser_colors.c \
-	mandatory/utils/ft_atoi.c mandatory/utils/str_utils2.c
+	mandatory/utils/ft_atoi.c mandatory/utils/str_utils2.c \
+	mandatory/game_loop/game_loop.c mandatory/game_loop/game_init.c mandatory/game_loop/game_hooks.c \
+	mandatory/game_loop/game_draw.c mandatory/game_loop/game_utils.c \
+	mandatory/raycaster/raycaster.c
 
 OBJ_MANDATORY = $(patsubst %.c, $(OBJ_DIR_MANDATORY)/%.o, $(SRC_MANDATORY))
 
