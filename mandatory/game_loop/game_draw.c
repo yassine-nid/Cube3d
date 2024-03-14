@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 00:12:02 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/14 02:31:11 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/14 19:17:20 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	draw_map(t_cub *cub, t_game *game, int ray_count, double stripe_size
 
 	angle = clamp_angle(cub->game->angle + 30);
 	index = -1;
-	while (++index <= ray_count)
+	while (++index < ray_count - 1)
 	{
 		hit = ray_cast(cub, angle, WALL);
 		data.color = 0;
@@ -79,7 +79,7 @@ void	do_draw_game(t_cub *cub, t_game *game, t_map *map)
 {
 	int		ray_count;
 	double	stripe_size;
-	
+
 	ray_count = (int)game->game_img->width;
 	stripe_size = game->game_img->width / ray_count;
 	draw_sky_and_floor(game, map);
