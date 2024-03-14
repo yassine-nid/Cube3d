@@ -6,7 +6,7 @@
 #    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 08:51:59 by yzirri            #+#    #+#              #
-#    Updated: 2024/03/14 00:42:11 by yzirri           ###   ########.fr        #
+#    Updated: 2024/03/14 02:58:15 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC_MANDATORY = mandatory/main/main.c mandatory/cleanup/clean_exits.c mandatory/
 	mandatory/utils/ft_atoi.c mandatory/utils/str_utils2.c \
 	mandatory/game_loop/game_loop.c mandatory/game_loop/game_init.c mandatory/game_loop/game_hooks.c \
 	mandatory/game_loop/game_draw.c mandatory/game_loop/game_utils.c \
+	mandatory/game_loop/game_handle_keys.c \
 	mandatory/raycaster/raycaster.c
 
 OBJ_MANDATORY = $(patsubst %.c, $(OBJ_DIR_MANDATORY)/%.o, $(SRC_MANDATORY))

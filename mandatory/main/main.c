@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:48:47 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/13 22:39:28 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/14 02:43:52 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ static void	init_game(t_game *game)
 {
 	game->game_img = NULL;
 	game->mlx = NULL;
+
+
+
+	game->key_backward = false;
+	game->key_forward = false;
+	game->key_left = false;
+	game->key_right = false;
+	game->key_turn_left = false;
+	game->key_turn_right = false;
+	game->key_close_game= false;
 }
 
 static void	init(t_cub *cub, t_map *map, t_game *game)

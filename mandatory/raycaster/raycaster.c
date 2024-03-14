@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 12:59:28 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/14 01:56:17 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/14 03:52:51 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static t_rayhit	single_ray(t_cub *cub, double angle, bool is_ver, char target)
 	rayhit.did_hit_target = false;
 	rayhit.hit_distance = 0;
 	rayhit.is_vertical = is_ver;
-	while (++fov < /*MAX_FOV*/10)
+	while (++fov < 100)
 	{
 		ray_distance = distance(is_ver, &result_move, angle);
 		result_move = calc_direction(result_move, ray_distance, angle);

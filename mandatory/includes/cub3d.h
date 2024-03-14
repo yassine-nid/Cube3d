@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/14 01:46:42 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/14 04:14:17 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,15 @@ typedef struct s_game
 	mlx_image_t		*game_img;
 	double			angle;
 	t_vector2		player_position;
-	uint32_t		game_grid_x;
-	uint32_t		game_grid_y;
+	bool			key_forward;
+	bool			key_backward;
+	bool			key_right;
+	bool			key_left;
+	bool			key_turn_left;
+	bool			key_turn_right;
+	bool			key_close_game;
+	double			old_x;
+	double			change_x;
 }	t_game;
 
 typedef struct s_stripe_data
@@ -188,6 +195,7 @@ void	do_game(t_cub *cub);
 void	do_init_game(t_cub *cub, t_game *game, t_map *map);
 void	register_events(t_cub *cub);
 void	do_draw_game(t_cub *cub, t_game *game, t_map *map);
+void	do_handle_keys(t_cub *cub, t_game *game, t_map *map);
 
 double	clamp_angle(double angle);
 t_vector2	calc_direction(t_vector2 start_position, double dis, double angle);
