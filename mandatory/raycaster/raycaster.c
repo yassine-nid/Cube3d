@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 12:59:28 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/14 03:52:51 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/14 22:28:44 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	get_correct_grid(t_vector2 *res_move, bool is_vert, double angle)
 {
 	double	error_tolerance;
 
-	error_tolerance = 0.001;
+	error_tolerance = 0.0001;
 	if (is_vert)
 	{
 		if (angle > 270 || angle < 90)

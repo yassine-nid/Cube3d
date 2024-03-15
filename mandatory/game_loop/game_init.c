@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 22:22:38 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/14 01:36:25 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/14 20:30:32 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,22 @@ static void	init_mlx(t_cub *cub, t_game *game)
 		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
 	if (mlx_image_to_window(game->mlx, game->game_img , 0, 0) < 0)
         clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	
+
+	game->mimimap_texture = mlx_load_png("./minimap_background.png");
+	if (!game->mimimap_texture)
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	
+	game->minimap_img = mlx_texture_to_image(game->mlx, game->mimimap_texture);
+	if (!game->minimap_img)
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	
+	if (!mlx_resize_image(game->minimap_img, MMAP_WIDTH, MMAP_HEIGHT))
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+
+	if (mlx_image_to_window(game->mlx, game->minimap_img , 10, 10) < 0)
+        clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	
 }
 
 void	do_init_game(t_cub *cub, t_game *game, t_map *map)

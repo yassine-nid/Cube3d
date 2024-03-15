@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:48:47 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/14 02:43:52 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/14 20:14:37 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,20 @@ static void	init_map(t_map *map)
 static void	init_game(t_game *game)
 {
 	game->game_img = NULL;
+	game->minimap_img = NULL;
 	game->mlx = NULL;
 
+	// inputs init
+	game->m_inputs.key_backward = false;
+	game->m_inputs.key_forward = false;
+	game->m_inputs.key_left = false;
+	game->m_inputs.key_right = false;
+	game->m_inputs.key_turn_left = false;
+	game->m_inputs.key_turn_right = false;
+	game->m_inputs.key_close_game= false;
+	game->m_inputs.change_x = 0;
+	game->m_inputs.old_x = -1;
 
-
-	game->key_backward = false;
-	game->key_forward = false;
-	game->key_left = false;
-	game->key_right = false;
-	game->key_turn_left = false;
-	game->key_turn_right = false;
-	game->key_close_game= false;
 }
 
 static void	init(t_cub *cub, t_map *map, t_game *game)

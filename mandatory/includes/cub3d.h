@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/14 04:14:17 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/15 21:15:48 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,14 @@
 #  define PI 3.14159
 # endif
 
+/// @brief a simple vector 2 of 2 doubles
 typedef struct s_vector2
 {
 	double	x;
 	double	y;
 }	t_vector2;
 
+/// @brief holds the result of a raycast
 typedef struct s_rayhit
 {
 	bool		did_hit_target;
@@ -45,23 +47,34 @@ typedef struct s_rayhit
 	bool		is_vertical;
 }	t_rayhit;
 
+/// @brief Holds all inputs used during the game
+typedef struct s_inputs
+{
+	bool	key_forward;
+	bool	key_backward;
+	bool	key_right;
+	bool	key_left;
+	bool	key_turn_left;
+	bool	key_turn_right;
+	bool	key_close_game;
+	double	old_x;
+	double	change_x;
+}	t_inputs;
+
+
+/// @brief holds game data
 typedef struct s_game
 {
 	mlx_t			*mlx;
 	mlx_image_t		*game_img;
+	mlx_image_t		*minimap_img;
+	mlx_texture_t	*mimimap_texture;
 	double			angle;
 	t_vector2		player_position;
-	bool			key_forward;
-	bool			key_backward;
-	bool			key_right;
-	bool			key_left;
-	bool			key_turn_left;
-	bool			key_turn_right;
-	bool			key_close_game;
-	double			old_x;
-	double			change_x;
+	t_inputs		m_inputs;
 }	t_game;
 
+/// @brief data required to draw a stripe
 typedef struct s_stripe_data
 {
 	uint32_t	height;
@@ -71,7 +84,7 @@ typedef struct s_stripe_data
 	mlx_image_t	*img;
 }	t_stripe_data;
 
-
+/// @brief parsed data you get from reading the file provided
 typedef struct s_map
 {
 	char			**map;
@@ -89,6 +102,7 @@ typedef struct s_map
 	char			start_location_type;
 }	t_map;
 
+/// @brief holds refrences to pretty much everything
 typedef struct s_cub
 {
 	t_map		*map_data;
@@ -96,6 +110,45 @@ typedef struct s_cub
 	int			fd;
 }	t_cub;
 
+#pragma region Mini map varriables
+
+# ifndef MMAP_HEIGHT
+# 	define MMAP_HEIGHT 230
+# endif
+
+# ifndef MMAP_WIDTH
+# 	define MMAP_WIDTH 230
+# endif
+
+# ifndef MMAP_GRID
+# 	define MMAP_GRID 30
+# endif
+
+# ifndef MMAP_EDGE
+# 	define MMAP_EDGE 10
+# endif
+
+# ifndef MMAP_PLAYER_SIZE
+# 	define MMAP_PLAYER_SIZE 4.5
+# endif
+
+# ifndef MMAP_PLAYER_COLOR
+# 	define MMAP_PLAYER_COLOR 0x2c4c9cFF
+# endif
+
+# ifndef MMAP_BACKGROUND_COLOR
+# 	define MMAP_BACKGROUND_COLOR 0xd5dbebFF
+# endif
+
+# ifndef MMAP_WALL_COLOR
+# 	define MMAP_WALL_COLOR 0xabb7d7FF
+# endif
+
+# ifndef MMAP_SPAWN_POINT_COLOR
+# 	define MMAP_SPAWN_POINT_COLOR 0xccffe2FF
+# endif
+
+#pragma endregion
 
 # pragma region error messages
 
@@ -201,6 +254,8 @@ double	clamp_angle(double angle);
 t_vector2	calc_direction(t_vector2 start_position, double dis, double angle);
 double	ang_to_rad(double angle);
 void	draw_stripe(t_stripe_data *data);
+
+void	do_draw_mini_map(t_cub *cub, t_game *game, t_map *map);
 
 #pragma endregion
 
