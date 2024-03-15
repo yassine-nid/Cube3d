@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 20:15:04 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/15 21:19:15 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/15 21:34:54 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	draw_map_elemets(t_game *game, t_map *map, int x, int y)
 		return ;
 	if (map->map[(int)current_y][(int)current_x] == WALL)
 		mlx_put_pixel(game->minimap_img, x, y, MMAP_WALL_COLOR);
+	if (map->map[(int)current_y][(int)current_x] == DOOR)
+		mlx_put_pixel(game->minimap_img, x, y, MMAP_DOOR_COLOR);
 	if (map->map[(int)current_y][(int)current_x] == map->start_location_type)
 		mlx_put_pixel(game->minimap_img, x, y, MMAP_SPAWN_POINT_COLOR);
 }

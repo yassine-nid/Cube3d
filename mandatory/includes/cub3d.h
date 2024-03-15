@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/15 21:15:48 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/15 21:35:26 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,10 @@ typedef struct s_cub
 # 	define MMAP_SPAWN_POINT_COLOR 0xccffe2FF
 # endif
 
+# ifndef MMAP_DOOR_COLOR
+# 	define MMAP_DOOR_COLOR 0x69696aFF
+# endif
+
 #pragma endregion
 
 # pragma region error messages
@@ -190,6 +194,10 @@ typedef struct s_cub
 
 # ifndef EAST
 #  define EAST 'E'
+# endif
+
+# ifndef DOOR
+#  define DOOR 'D'
 # endif
 
 # pragma endregion

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 22:22:38 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/14 20:30:32 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/15 22:03:06 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ static void	init_mlx(t_cub *cub, t_game *game)
 
 	if (mlx_image_to_window(game->mlx, game->minimap_img , 10, 10) < 0)
         clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	
+
+	mlx_set_cursor_mode(cub->game->mlx, MLX_MOUSE_DISABLED);
 	
 }
 

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 02:48:07 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/15 21:25:26 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/15 22:05:17 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	do_handle_keys(t_cub *cub, t_game *game, t_map *map)
 	double		move_angle;
 	t_rayhit	hit;
 
-	speed = 0.01;
-	rotate_speed = 2;
-	double mouse_rotate_speed = 0.1;
+	speed = 0.03;
+	rotate_speed = 2.5;
+	double mouse_rotate_speed = 0.06;
 	if (game->m_inputs.key_close_game)
 		clean_exit(cub, "Game closed", 0);
 	if (game->m_inputs.key_turn_left)

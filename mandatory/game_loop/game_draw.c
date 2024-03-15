@@ -6,12 +6,13 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 00:12:02 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/14 19:17:20 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/15 21:43:39 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/// @brief draws the sky and floot
 static void	draw_sky_and_floor(t_game *game, t_map *map)
 {
 	int	x;
@@ -31,6 +32,7 @@ static void	draw_sky_and_floor(t_game *game, t_map *map)
 	}
 }
 
+/// @brief when a raycast hits a wall
 static void	on_wall_hit(t_game *game, t_rayhit *hit, double angle, t_stripe_data *data)
 {
 	angle = clamp_angle(angle - game->angle);
@@ -43,7 +45,8 @@ static void	on_wall_hit(t_game *game, t_rayhit *hit, double angle, t_stripe_data
 	data->height = game->game_img->height / 2;
 	if (hit->hit_distance > 0)
 	{
-		data->height = (64 * 320) / hit->hit_distance;
+		// data->height = (64 * 320) / hit->hit_distance;
+		data->height = (64 * 650) / hit->hit_distance;
 		if (data->height >= game->game_img->height / 2)
 			data->height = game->game_img->height / 2;
 		if (data->height < 0)
@@ -75,6 +78,7 @@ static void	draw_map(t_cub *cub, t_game *game, int ray_count, double stripe_size
 	}
 }
 
+/// @brief draws the map as in 3D
 void	do_draw_game(t_cub *cub, t_game *game, t_map *map)
 {
 	int		ray_count;
