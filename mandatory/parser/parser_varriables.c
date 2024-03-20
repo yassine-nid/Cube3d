@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_varriables.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:50:06 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/13 20:00:31 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/20 00:18:26 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,4 @@ void	varriables_parse(t_cub *cub, t_map *map, char *line, char *argv[])
 			return (free(line), post_arg_validation(cub, map));
 		free(line);
 	}
-	post_arg_validation(cub, map);
 }

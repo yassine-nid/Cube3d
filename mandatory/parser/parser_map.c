@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:48:10 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/15 21:34:04 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/20 00:41:24 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ static void	validate_map_walls(t_cub *cub, t_map *map)
 			if (!check_x(map->map, map->longest_line, x, y))
 				clean_exit(cub, "Invalid map walls", 1);
 			if (!check_y(map->map, map->map_size, x, y))
-				clean_exit(cub, "Invalid map walls", 1);
-			if (!check_angles(map, x, y))
 				clean_exit(cub, "Invalid map walls", 1);
 		}
 	}

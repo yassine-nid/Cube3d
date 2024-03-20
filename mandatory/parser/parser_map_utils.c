@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 07:31:42 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/13 19:50:47 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/20 00:41:51 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,3 @@ bool	check_y(char **map, int len, int x, int y)
 	return (true);
 }
 
-/// @brief checks a nodes angles if they are a valid type
-bool	check_angles(t_map *map, int x, int y)
-{
-	char	cmp;
-
-	cmp = map->map[y + 1][x + 1];
-	if (!cmp || ft_isspace(cmp))
-		return (false);
-	cmp = map->map[y + 1][x - 1];
-	if (!cmp || ft_isspace(cmp))
-		return (false);
-	cmp = map->map[y - 1][x + 1];
-	if (!cmp || ft_isspace(cmp))
-		return (false);
-	cmp = map->map[y - 1][x - 1];
-	if (!cmp || ft_isspace(cmp))
-		return (false);
-	return (true);
-}

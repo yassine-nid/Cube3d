@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   game_handle_keys.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 02:48:07 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/15 22:05:17 by yzirri           ###   ########.fr       */
+/*   Created: 2024/03/20 00:52:33 by ynidkouc          #+#    #+#             */
+/*   Updated: 2024/03/20 00:52:34 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cub3d.h"
 
@@ -47,9 +48,9 @@ void	do_handle_keys(t_cub *cub, t_game *game, t_map *map)
 	double		move_angle;
 	t_rayhit	hit;
 
-	speed = 0.03;
+	speed = 0.07;
 	rotate_speed = 2.5;
-	double mouse_rotate_speed = 0.06;
+	double mouse_rotate_speed = 0.08;
 	if (game->m_inputs.key_close_game)
 		clean_exit(cub, "Game closed", 0);
 	if (game->m_inputs.key_turn_left)
@@ -65,7 +66,7 @@ void	do_handle_keys(t_cub *cub, t_game *game, t_map *map)
 	{
 		move_angle = clamp_angle(move_angle);
 		hit = ray_cast(cub, move_angle, WALL);
-		if (!hit.did_hit_target || hit.hit_distance > 0.03)
+		if (!hit.did_hit_target || hit.hit_distance > 0.3)
 			game->player_position = calc_direction(game->player_position, speed, move_angle);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/15 21:35:26 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/20 00:41:44 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,21 @@ typedef struct s_game
 	double			angle;
 	t_vector2		player_position;
 	t_inputs		m_inputs;
+	
+	mlx_texture_t	*n_txt;
+	mlx_texture_t	*w_txt;
+	mlx_texture_t	*e_txt;
+	mlx_texture_t	*s_txt;
 }	t_game;
 
 /// @brief data required to draw a stripe
 typedef struct s_stripe_data
 {
 	uint32_t	height;
+	uint32_t	height_y;
 	uint32_t	start_x_pos;
 	uint32_t	end_x_pos;
+	char		direction;
 	int			color;
 	mlx_image_t	*img;
 }	t_stripe_data;
@@ -105,9 +112,10 @@ typedef struct s_map
 /// @brief holds refrences to pretty much everything
 typedef struct s_cub
 {
-	t_map		*map_data;
-	t_game		*game;
-	int			fd;
+	t_map			*map_data;
+	t_game			*game;
+	int				fd;
+	mlx_texture_t	*txt1;
 }	t_cub;
 
 #pragma region Mini map varriables
@@ -236,7 +244,6 @@ void	alloc_init_map(t_cub *cub, t_map *map);
 
 bool	check_x(char **map, int len, int x, int y);
 bool	check_y(char **map, int len, int x, int y);
-bool	check_angles(t_map *map, int x, int y);
 
 void	colors_parse(t_cub *cub, t_map *map);
 
@@ -261,7 +268,7 @@ void	do_handle_keys(t_cub *cub, t_game *game, t_map *map);
 double	clamp_angle(double angle);
 t_vector2	calc_direction(t_vector2 start_position, double dis, double angle);
 double	ang_to_rad(double angle);
-void	draw_stripe(t_stripe_data *data);
+void	draw_stripe(t_stripe_data *data, t_rayhit hit, t_cub *cub);
 
 void	do_draw_mini_map(t_cub *cub, t_game *game, t_map *map);
 

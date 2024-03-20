@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   game_hooks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 23:10:19 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/14 20:16:33 by yzirri           ###   ########.fr       */
+/*   Created: 2024/03/20 00:52:39 by ynidkouc          #+#    #+#             */
+/*   Updated: 2024/03/20 00:52:40 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cub3d.h"
 

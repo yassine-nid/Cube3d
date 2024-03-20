@@ -9,5 +9,6 @@
 		"unordered_map": "c",
 		"__locale": "c",
 		"locale": "c"
-	}
+	},
+	"cmake.sourceDirectory": "/Users/ynidkouc/Desktop/cub.v3/MLX42"
 }

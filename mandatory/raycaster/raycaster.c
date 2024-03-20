@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 12:59:28 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/14 22:28:44 by yzirri           ###   ########.fr       */
+/*   Created: 2024/03/20 00:52:05 by ynidkouc          #+#    #+#             */
+/*   Updated: 2024/03/20 00:52:06 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cub3d.h"
 

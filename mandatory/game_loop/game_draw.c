@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 00:12:02 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/15 21:43:39 by yzirri           ###   ########.fr       */
+/*   Created: 2024/03/20 00:52:26 by ynidkouc          #+#    #+#             */
+/*   Updated: 2024/03/20 00:52:27 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cub3d.h"
 
@@ -32,26 +33,42 @@ static void	draw_sky_and_floor(t_game *game, t_map *map)
 	}
 }
 
-/// @brief when a raycast hits a wall
 static void	on_wall_hit(t_game *game, t_rayhit *hit, double angle, t_stripe_data *data)
 {
-	angle = clamp_angle(angle - game->angle);
-	hit->hit_distance = hit->hit_distance * 112;
-	hit->hit_distance = hit->hit_distance * cos(ang_to_rad(angle));
+	hit->hit_distance = hit->hit_distance * 112; // why 112
+	hit->hit_distance = hit->hit_distance * cos(ang_to_rad(angle - game->angle));
 	
 	data->color = 0xFFFFFF;
 	if (!hit->is_vertical)
 		data->color = 0xFFFFD0;
 	data->height = game->game_img->height / 2;
-	if (hit->hit_distance > 0)
+	if (hit->hit_distance > 1)
 	{
-		// data->height = (64 * 320) / hit->hit_distance;
-		data->height = (64 * 650) / hit->hit_distance;
-		if (data->height >= game->game_img->height / 2)
-			data->height = game->game_img->height / 2;
+		data->height = (64 * 1000) / hit->hit_distance;
 		if (data->height < 0)
 			data->height = 0;
 	}
+	else
+		data->height = (64 * 1000) / 1;
+	if (data->height > game->game_img->height / 2)
+		data->height_y = game->game_img->height / 2;
+	else
+		data->height_y = data->height;
+	if (hit->is_vertical)
+	{
+		if (angle > 90 && angle < 270)
+			data->direction = WEST;
+		else
+			data->direction = EAST;
+	}
+	else
+	{
+		if (angle > 180)
+			data->direction = SOUTH;
+		else
+			data->direction = NORTH;
+	}
+		
 }
 
 static void	draw_map(t_cub *cub, t_game *game, int ray_count, double stripe_size)
@@ -73,7 +90,7 @@ static void	draw_map(t_cub *cub, t_game *game, int ray_count, double stripe_size
 		data.img = game->game_img;
 		if (hit.did_hit_target)
 			on_wall_hit(game, &hit, angle, &data);
-		draw_stripe(&data);
+		draw_stripe(&data, hit, cub);
 		angle = clamp_angle(angle - ((double)60 / (double)ray_count));
 	}
 }

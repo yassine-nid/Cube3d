@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 22:22:38 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/15 22:03:06 by yzirri           ###   ########.fr       */
+/*   Created: 2024/03/20 00:52:45 by ynidkouc          #+#    #+#             */
+/*   Updated: 2024/03/20 00:52:46 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cub3d.h"
 
@@ -87,7 +88,22 @@ static void	init_mlx(t_cub *cub, t_game *game)
 	
 
 	mlx_set_cursor_mode(cub->game->mlx, MLX_MOUSE_DISABLED);
+	// cub->txt1 = mlx_load_png("./wl.png");
+	cub->game->n_txt = mlx_load_png(cub->map_data->tx_north);
+	if (!cub->game->n_txt)
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	cub->game->s_txt = mlx_load_png(cub->map_data->tx_south);
+	if (!cub->game->s_txt)
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	cub->game->e_txt = mlx_load_png(cub->map_data->tx_east);
+	if (!cub->game->e_txt)
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	cub->game->w_txt = mlx_load_png(cub->map_data->tx_west);
+	if (!cub->game->w_txt)
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
 	
+
+	// 5000 * 3000 > 5000 * 3000
 }
 
 void	do_init_game(t_cub *cub, t_game *game, t_map *map)
