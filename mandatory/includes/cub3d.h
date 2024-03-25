@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/25 01:58:07 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/25 02:54:28 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,18 @@ typedef struct s_cub
 	int				fd;
 }	t_cub;
 
+typedef struct	s_sprite
+{
+	mlx_texture_t	*txt;
+	t_vector2		position;
+	uint32_t		height;
+	uint32_t		width;
+	int				start_x;
+	int				start_y;
+	double			distance;
+	double			angle;
+}				t_sprite;
+
 # pragma endregion
 
 # pragma region Mini map varriables
@@ -299,6 +311,9 @@ t_door			*get_door_data(t_cub *cub, t_rayhit hit);
 void			door_update(t_cub *cub, t_game *game);
 void			on_interact_clicked(t_cub *cub);
 
+
+void			draw_sprite(t_cub *cub, t_sprite *sprite);
+t_sprite		sprite_init(double x, double y, t_cub *cub);
 # pragma endregion
 
 # pragma region raycaster
