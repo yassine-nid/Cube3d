@@ -6,12 +6,13 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:48:47 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/14 20:14:37 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/22 19:59:56 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/// @brief initialize map varriables
 static void	init_map(t_map *map)
 {
 	map->map = NULL;
@@ -29,13 +30,17 @@ static void	init_map(t_map *map)
 	map->start_location_type = '\0';
 }
 
+/// @brief initialize game varriables
 static void	init_game(t_game *game)
 {
-	game->game_img = NULL;
+	game->mimimap_texture = NULL;
 	game->minimap_img = NULL;
+	game->game_img = NULL;
+	game->e_txt = NULL;
+	game->n_txt = NULL;
+	game->s_txt = NULL;
+	game->w_txt = NULL;
 	game->mlx = NULL;
-
-	// inputs init
 	game->m_inputs.key_backward = false;
 	game->m_inputs.key_forward = false;
 	game->m_inputs.key_left = false;
@@ -46,6 +51,13 @@ static void	init_game(t_game *game)
 	game->m_inputs.change_x = 0;
 	game->m_inputs.old_x = -1;
 
+	game->doors = NULL;
+	game->door_texts = NULL;
+
+	game->current_time = 0;
+	game->preveus_time = 0;
+	game->frame_time = 0;
+	game->frame_rate = 0;
 }
 
 static void	init(t_cub *cub, t_map *map, t_game *game)
@@ -59,7 +71,7 @@ static void	init(t_cub *cub, t_map *map, t_game *game)
 
 void	leak_detector(void)
 {
-	system("leaks cub3D");
+	//system("leaks cub3D");
 }
 
 int	main(int argc, char *argv[])
@@ -68,7 +80,7 @@ int	main(int argc, char *argv[])
 	t_map	map;
 	t_game	game;
 
-	// atexit(leak_detector);
+	atexit(leak_detector);
 	init(&cub, &map, &game);
 	do_parse(&cub, argc, argv);
 	do_game(&cub);

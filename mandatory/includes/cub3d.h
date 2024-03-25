@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/20 00:41:44 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:58:07 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,19 @@
 # include <fcntl.h>
 # include <math.h>
 # include "MLX42/MLX42.h"
+# include <sys/time.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif
 
-# ifndef PI
-#  define PI 3.14159
-# endif
+# pragma region General varriables
+
+# define WIN_HEIGHT 1000.0
+# define WIN_WIDTH 1780.0
+# define GAME_QUALITY 2
+# define GAME_NAME "cub3D"
+# define PI 3.14159
 
 /// @brief a simple vector 2 of 2 doubles
 typedef struct s_vector2
@@ -37,15 +42,28 @@ typedef struct s_vector2
 	double	y;
 }	t_vector2;
 
-/// @brief holds the result of a raycast
-typedef struct s_rayhit
+/// @brief line drawing data
+typedef struct s_line_data
 {
-	bool		did_hit_target;
-	double		hit_distance;
-	t_vector2	point;
-	char		target;
-	bool		is_vertical;
-}	t_rayhit;
+	int	p0_x;
+	int	p0_y;
+	int	p1_x;
+	int	p1_y;
+	int	diffrence_x;
+	int	diffrence_y;
+	int	direction_x;
+	int	direction_y;
+	int	err;
+	int	temp_err;
+}	t_line_data;
+
+# pragma endregion
+
+# pragma region Movement varriables
+
+# define MOVE_SPEED 2
+# define ROTATE_SPEED 45
+# define MOUSE_ROTATE_SPEED 2.5
 
 /// @brief Holds all inputs used during the game
 typedef struct s_inputs
@@ -61,6 +79,37 @@ typedef struct s_inputs
 	double	change_x;
 }	t_inputs;
 
+# pragma endregion
+
+# pragma region t_rayhit
+
+/// @brief holds the result of a raycast
+typedef struct s_rayhit
+{
+	bool		did_hit_target;
+	double		hit_distance;
+	t_vector2	point;
+	char		target;
+	bool		is_vertical;
+}	t_rayhit;
+
+# pragma endregion
+
+# pragma region t_game
+
+# define S_DOOR_COUNT 16
+# define DOOR_INTERACT_DISTANCE 2
+# define DOOR_ANIM_SPEED 1200
+
+typedef struct s_door
+{
+	int			door_x;
+	int			door_y;
+	bool		is_open;
+	bool		is_opening;
+	int			current_texture;
+	double		door_update_time;
+}	t_door;
 
 /// @brief holds game data
 typedef struct s_game
@@ -72,12 +121,21 @@ typedef struct s_game
 	double			angle;
 	t_vector2		player_position;
 	t_inputs		m_inputs;
-	
 	mlx_texture_t	*n_txt;
 	mlx_texture_t	*w_txt;
 	mlx_texture_t	*e_txt;
 	mlx_texture_t	*s_txt;
+	t_door			**doors;
+	mlx_texture_t	**door_texts;
+	long long		current_time;
+	long long		preveus_time;
+	double			frame_time;
+	double			frame_rate;
 }	t_game;
+
+# pragma endregion
+
+# pragma region Stripe Data
 
 /// @brief data required to draw a stripe
 typedef struct s_stripe_data
@@ -87,9 +145,13 @@ typedef struct s_stripe_data
 	uint32_t	start_x_pos;
 	uint32_t	end_x_pos;
 	char		direction;
-	int			color;
 	mlx_image_t	*img;
+	t_rayhit	*hit;
 }	t_stripe_data;
+
+# pragma endregion
+
+# pragma region t_map
 
 /// @brief parsed data you get from reading the file provided
 typedef struct s_map
@@ -109,175 +171,140 @@ typedef struct s_map
 	char			start_location_type;
 }	t_map;
 
+# pragma endregion
+
+# pragma region t_cub
+
 /// @brief holds refrences to pretty much everything
 typedef struct s_cub
 {
 	t_map			*map_data;
 	t_game			*game;
 	int				fd;
-	mlx_texture_t	*txt1;
 }	t_cub;
 
-#pragma region Mini map varriables
+# pragma endregion
 
-# ifndef MMAP_HEIGHT
-# 	define MMAP_HEIGHT 230
-# endif
+# pragma region Mini map varriables
 
-# ifndef MMAP_WIDTH
-# 	define MMAP_WIDTH 230
-# endif
+# define MMAP_DIRECTION_LENGTH 15
+# define MMAP_HEIGHT 230
+# define MMAP_WIDTH 230
+# define MMAP_GRID 30
+# define MMAP_EDGE 10
+# define MMAP_PLAYER_SIZE 4.5
+# define MMAP_PLAYER_COLOR 0x2c4c9cFF
+# define MMAP_BACKGROUND_COLOR 0xd5dbebFF
+# define MMAP_WALL_COLOR 0xabb7d7FF
+# define MMAP_SPAWN_POINT_COLOR 0xccffe2FF
+# define MMAP_DOOR_COLOR 0x69696aFF
+# define MMAP_PATH "./assets/minimap/minimap_background.png"
 
-# ifndef MMAP_GRID
-# 	define MMAP_GRID 30
-# endif
-
-# ifndef MMAP_EDGE
-# 	define MMAP_EDGE 10
-# endif
-
-# ifndef MMAP_PLAYER_SIZE
-# 	define MMAP_PLAYER_SIZE 4.5
-# endif
-
-# ifndef MMAP_PLAYER_COLOR
-# 	define MMAP_PLAYER_COLOR 0x2c4c9cFF
-# endif
-
-# ifndef MMAP_BACKGROUND_COLOR
-# 	define MMAP_BACKGROUND_COLOR 0xd5dbebFF
-# endif
-
-# ifndef MMAP_WALL_COLOR
-# 	define MMAP_WALL_COLOR 0xabb7d7FF
-# endif
-
-# ifndef MMAP_SPAWN_POINT_COLOR
-# 	define MMAP_SPAWN_POINT_COLOR 0xccffe2FF
-# endif
-
-# ifndef MMAP_DOOR_COLOR
-# 	define MMAP_DOOR_COLOR 0x69696aFF
-# endif
-
-#pragma endregion
+# pragma endregion
 
 # pragma region error messages
 
-# ifndef INVALID_MAP_CONTENT
-#  define INVALID_MAP_CONTENT "Invalid map content"
-# endif
-
-# ifndef INVALID_MAP_CHECK
-#  define INVALID_MAP_CHECK "Invalid map"
-# endif
-
-# ifndef INVALID_MAP_VARRIABLES
-#  define INVALID_MAP_VARRIABLES "Invalid map varriables"
-# endif
+# define INVALID_MAP_CONTENT "Invalid map content"
+# define INVALID_MAP_CHECK "Invalid map"
+# define INVALID_MAP_VARRIABLES "Invalid map varriables"
 
 # pragma endregion
 
 # pragma region parsing varriables
 
-# ifndef WALL
-#  define WALL '1'
-# endif
-
-# ifndef EMPTY
-#  define EMPTY '0'
-# endif
-
-# ifndef NORTH
-#  define NORTH 'N'
-# endif
-
-# ifndef SOUTH
-#  define SOUTH 'S'
-# endif
-
-# ifndef WEST
-#  define WEST 'W'
-# endif
-
-# ifndef EAST
-#  define EAST 'E'
-# endif
-
-# ifndef DOOR
-#  define DOOR 'D'
-# endif
+# define WALL '1'
+# define EMPTY '0'
+# define NORTH 'N'
+# define SOUTH 'S'
+# define WEST 'W'
+# define EAST 'E'
+# define DOOR 'D'
 
 # pragma endregion
 
-#pragma region Cleanup
+# pragma region Cleanup
 
-void	clean_exit(t_cub *cub, char *error, int code);
-void	cleanup(t_cub *cub);
+void			clean_exit(t_cub *cub, char *error, int code);
+void			cleanup(t_cub *cub);
+void			cleanup_game(t_game *game);
 
-#pragma endregion
+# pragma endregion
 
-#pragma region Utils
+# pragma region Utils
 
-int		ft_putstr_fd(char *s, int fd);
-bool	is_valid_extention(const char *src, const char *ne);
-bool	ft_isspace(char c);
-int		ft_strlen(const char *str);
-char	*ft_strdup(const char *s1);
-char	**ft_split(char const *s, char c);
-int		ft_atoi(const char *str);
+int				ft_putstr_fd(char *s, int fd);
+bool			is_valid_extention(const char *src, const char *ne);
+bool			ft_isspace(char c);
+int				ft_strlen(const char *str);
+char			*ft_strdup(const char *s1);
+char			**ft_split(char const *s, char c);
+int				ft_atoi(const char *str);
+void			ft_strcpy(char *dst, const char *src);
+char			*ft_itoa(int n);
 
-#pragma endregion
+# pragma endregion
 
-#pragma region Parser
+# pragma region Parser
 
-void	do_parse(t_cub *cub, int argc, char *argv[]);
-void	varriables_parse(t_cub *cub, t_map *map, char *line, char *argv[]);
-void	map_parse(t_cub *cub, t_map *map, char *argv[]);
-void	open_map_file(t_cub *cub, char *argv[]);
-void	close_map_file(t_cub *cub);
-int		str_len_no_endspace(char *line);
-void	remove_new_line(char *line);
-void	save_line(t_cub *cub, t_map *map, char **line, int map_index);
-void	read_x_lines(int fd, int count);
-void	alloc_init_map(t_cub *cub, t_map *map);
+void			do_parse(t_cub *cub, int argc, char *argv[]);
+void			varriables_parse(t_cub *cub, t_map *map,
+					char *line, char *argv[]);
+void			map_parse(t_cub *cub, t_map *map, char *argv[]);
+void			open_map_file(t_cub *cub, char *argv[]);
+void			close_map_file(t_cub *cub);
+int				str_len_no_endspace(char *line);
+void			remove_new_line(char *line);
+void			save_line(t_cub *cub, t_map *map, char **line, int map_index);
+void			read_x_lines(int fd, int count);
+void			alloc_init_map(t_cub *cub, t_map *map);
 
-bool	check_x(char **map, int len, int x, int y);
-bool	check_y(char **map, int len, int x, int y);
+bool			check_x(char **map, int len, int x, int y);
+bool			check_y(char **map, int len, int x, int y);
 
-void	colors_parse(t_cub *cub, t_map *map);
+void			colors_parse(t_cub *cub, t_map *map);
 
-#pragma endregion
+# pragma endregion
 
-#pragma region Get_next_line
+# pragma region Get_next_line
 
-char	*get_next_line(int fd);
-char	*append(char *src, char *dst, int *new_l);
-int		str_len(char *str1, char *str2);
+char			*get_next_line(int fd);
+char			*append(char *src, char *dst, int *new_l);
+int				str_len(char *str1, char *str2);
 
-#pragma endregion
+# pragma endregion
 
-#pragma region game_loop
+# pragma region game_loop
 
-void	do_game(t_cub *cub);
-void	do_init_game(t_cub *cub, t_game *game, t_map *map);
-void	register_events(t_cub *cub);
-void	do_draw_game(t_cub *cub, t_game *game, t_map *map);
-void	do_handle_keys(t_cub *cub, t_game *game, t_map *map);
+void			do_draw_map(t_cub *cub, t_game *game, int ray_nt, double str);
+t_rayhit		get_valid_hit(t_cub *cub, double angle);
 
-double	clamp_angle(double angle);
-t_vector2	calc_direction(t_vector2 start_position, double dis, double angle);
-double	ang_to_rad(double angle);
-void	draw_stripe(t_stripe_data *data, t_rayhit hit, t_cub *cub);
+void			do_game(t_cub *cub);
+void			do_init_game(t_cub *cub, t_game *game, t_map *map);
+void			register_events(t_cub *cub);
+void			do_draw_game(t_cub *cub, t_game *game, t_map *map);
+void			do_handle_keys(t_cub *cub, t_game *game);
+void			draw_stripe(t_stripe_data data, t_cub *cub);
+void			do_draw_mini_map(t_cub *cub, t_game *game, t_map *map);
+double			clamp_angle(double angle);
+double			ang_to_rad(double angle);
 
-void	do_draw_mini_map(t_cub *cub, t_game *game, t_map *map);
+t_vector2		calc_direction(t_vector2 start_pos, double dis, double angle);
 
-#pragma endregion
+mlx_texture_t	*load_texture(t_cub *cub, char *path);
+mlx_image_t		*texture_to_image(t_cub *cub, mlx_texture_t *texture);
 
-#pragma region raycaster
+void			allocate_doors(t_cub *cub, t_game *game);
+t_door			*get_door_data(t_cub *cub, t_rayhit hit);
 
-t_rayhit	ray_cast(t_cub *cub, double angle, char target);
+void			door_update(t_cub *cub, t_game *game);
+void			on_interact_clicked(t_cub *cub);
 
-#pragma endregion
+# pragma endregion
+
+# pragma region raycaster
+
+t_rayhit		ray_cast(t_cub *cub, double angle, char target);
+
+# pragma endregion
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 20:15:04 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/15 21:34:54 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/24 22:20:01 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,59 @@ static void	draw_map_elemets(t_game *game, t_map *map, int x, int y)
 		mlx_put_pixel(game->minimap_img, x, y, MMAP_SPAWN_POINT_COLOR);
 }
 
+/// @brief keep drawing direction line pixel by pixel
+static void	loop_and_draw_line(t_game *g, t_line_data data)
+{
+	while (1)
+	{
+		mlx_put_pixel(g->minimap_img, data.p0_x, data.p0_y, MMAP_PLAYER_COLOR);
+		if (data.p0_x == data.p1_x && data.p0_y == data.p1_y)
+			break ;
+		data.temp_err = data.err;
+		if (data.temp_err > -data.diffrence_x)
+		{
+			data.err -= data.diffrence_y;
+			data.p0_x += data.direction_x;
+		}
+		if (data.temp_err < data.diffrence_y)
+		{
+			data.err += data.diffrence_x;
+			data.p0_y += data.direction_y;
+		}
+	}
+}
+
+/// @brief prepare varriable to draw direction line
+static void	draw_mmap_direction(t_game *game, t_vector2 center, t_vector2 dire)
+{
+	// understand how this works or delete
+	t_line_data	line_data;
+
+	line_data.p0_x = center.x;
+	line_data.p0_y = center.y;
+	line_data.p1_x = dire.x;
+	line_data.p1_y = dire.y;
+	line_data.diffrence_x = abs(line_data.p1_x - line_data.p0_x);
+	line_data.diffrence_y = abs(line_data.p1_y - line_data.p0_y);
+	line_data.direction_x = -1;
+	line_data.direction_y = -1;
+	if (line_data.p0_x < line_data.p1_x)
+		line_data.direction_x = 1;
+	if (line_data.p0_y < line_data.p1_y)
+		line_data.direction_y = 1;
+	line_data.err = -line_data.diffrence_y / 2;
+	if (line_data.diffrence_x > line_data.diffrence_y)
+		line_data.err = line_data.diffrence_x / 2;
+	loop_and_draw_line(game, line_data);
+}
+
 /// @brief draw minimap
 void	do_draw_mini_map(t_cub *cub, t_game *game, t_map *map)
 {
-	int		x;
-	int		y;
+	t_vector2	current_dire;
+	t_vector2	center;
+	int			y;
+	int			x;
 
 	(void)cub;
 	y = MMAP_EDGE;
@@ -68,4 +116,8 @@ void	do_draw_mini_map(t_cub *cub, t_game *game, t_map *map)
 		}
 		y++;
 	}
+	center.x = MMAP_WIDTH / 2;
+	center.y = MMAP_HEIGHT / 2;
+	current_dire = calc_direction(center, MMAP_DIRECTION_LENGTH, game->angle);
+	draw_mmap_direction(game, center, current_dire);
 }

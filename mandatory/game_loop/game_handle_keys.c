@@ -3,70 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   game_handle_keys.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:33 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/20 00:52:34 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/03/22 20:27:12 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/cub3d.h"
 
-static bool	is_can_move(t_game *game, t_inputs *inputs, double *move_angle)
+/// @brief get the angle the next move is to be performed at
+static double	get_move_angle(t_inputs *inputs, double angle)
 {
-	*move_angle = game->angle;
+	double	new_angle;
+
+	new_angle = angle;
 	if (inputs->key_right)
 	{
 		if (inputs->key_forward)
-			*move_angle = *move_angle - 45;
+			new_angle = angle - 45;
 		else if (inputs->key_backward)
-			*move_angle = *move_angle - 135;
+			new_angle = angle - 135;
 		else
-			*move_angle = *move_angle - 90;
+			new_angle = angle - 90;
 	}
 	else if (inputs->key_left)
 	{
 		if (inputs->key_forward)
-			*move_angle = *move_angle + 45;
+			new_angle = angle + 45;
 		else if (inputs->key_backward)
-			*move_angle = *move_angle + 135;
+			new_angle = angle + 135;
 		else
-			*move_angle = *move_angle + 90;
+			new_angle = angle + 90;
 	}
 	else if (inputs->key_backward)
-		*move_angle = *move_angle + 180;
-	return (inputs->key_forward || inputs->key_backward
-		|| inputs->key_left || inputs->key_right);
+		new_angle = angle + 180;
+	return (clamp_angle(new_angle));
 }
 
-void	do_handle_keys(t_cub *cub, t_game *game, t_map *map)
+/// @brief returns if any movement key is clicked
+static bool	is_movement_key_down(t_game *game)
 {
-	(void)map;
-	double 		speed;
-	double 		rotate_speed;
-	double		move_angle;
-	t_rayhit	hit;
+	if (game->m_inputs.key_forward || game->m_inputs.key_backward)
+		return (true);
+	if (game->m_inputs.key_left || game->m_inputs.key_right)
+		return (true);
+	return (false);
+}
 
-	speed = 0.07;
-	rotate_speed = 2.5;
-	double mouse_rotate_speed = 0.08;
-	if (game->m_inputs.key_close_game)
-		clean_exit(cub, "Game closed", 0);
-	if (game->m_inputs.key_turn_left)
+/// @brief move the player if its a valid move
+static void	do_move(t_cub *cub, t_game *game)
+{
+	t_rayhit	hit;
+	double		move_ang;
+	t_vector2	new_pos;
+	double		move_speed;
+
+	if (is_movement_key_down(game))
+	{
+		move_ang = get_move_angle(&game->m_inputs, game->angle);
+		hit = get_valid_hit(cub, move_ang);
+		if (hit.did_hit_target && hit.hit_distance <= 0.3)
+			return ;
+		move_speed = MOVE_SPEED * game->frame_time;
+		new_pos = calc_direction(game->player_position, move_speed, move_ang);
+		game->player_position = new_pos;
+	}
+}
+
+/// @brief process buffered inputs
+void	do_handle_keys(t_cub *cub, t_game *game)
+{
+	double		tmp_angle;
+	t_inputs	*inputs;
+	double		rotate_speed;
+
+	inputs = &game->m_inputs;
+	if (inputs->key_close_game)
+		clean_exit(cub, "Game closed", EXIT_SUCCESS);
+	rotate_speed = ROTATE_SPEED * game->frame_time;
+	if (inputs->key_turn_left)
 		game->angle = clamp_angle(game->angle + rotate_speed);
-	if (game->m_inputs.key_turn_right)
+	if (inputs->key_turn_right)
 		game->angle = clamp_angle(game->angle - rotate_speed);
-	if (game->m_inputs.change_x != 0)
+	if (inputs->change_x != 0)
 	{
-		game->angle = clamp_angle(game->angle + (game->m_inputs.change_x * mouse_rotate_speed));
-		game->m_inputs.change_x = 0;
+		rotate_speed = MOUSE_ROTATE_SPEED * game->frame_time;
+		tmp_angle = game->angle + (inputs->change_x * rotate_speed);
+		game->angle = clamp_angle(tmp_angle);
+		inputs->change_x = 0;
 	}
-	if (is_can_move(game, &game->m_inputs, &move_angle))
-	{
-		move_angle = clamp_angle(move_angle);
-		hit = ray_cast(cub, move_angle, WALL);
-		if (!hit.did_hit_target || hit.hit_distance > 0.3)
-			game->player_position = calc_direction(game->player_position, speed, move_angle);
-	}
+	do_move(cub, game);
 }

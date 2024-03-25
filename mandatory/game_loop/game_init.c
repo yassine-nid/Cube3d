@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:45 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/20 00:52:46 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:41:34 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/cub3d.h"
 
-/// @brief convert player start position from array[y][x] into image pixel location
+/// @brief convert player start position from array[y][x] into image pixel loca
 static t_vector2	load_player_start_position(t_map *map)
 {
 	t_vector2	result;
@@ -54,56 +53,51 @@ static void	init_game_vars(t_map *map, t_game *game)
 		game->angle = 180;
 }
 
+/// @brief load MLX and essential images
+static void	initial_mlx_load(t_cub *cub, t_game *game)
+{
+	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, GAME_NAME, false);
+	if (!game->mlx)
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	game->game_img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!game->game_img)
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	if (mlx_image_to_window(game->mlx, game->game_img, 0, 0) < 0)
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	game->mimimap_texture = load_texture(cub, MMAP_PATH);
+	game->minimap_img = texture_to_image(cub, game->mimimap_texture);
+	if (!mlx_resize_image(game->minimap_img, MMAP_WIDTH, MMAP_HEIGHT))
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	if (mlx_image_to_window(game->mlx, game->minimap_img, 10, 10) < 0)
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	mlx_set_cursor_mode(cub->game->mlx, MLX_MOUSE_DISABLED);
+}
+
 /// @brief creates mlx_ptr and the image to be used for drawing
 static void	init_mlx(t_cub *cub, t_game *game)
 {
-	uint32_t	win_height;
-	uint32_t	win_width;
+	char	door_path[34];
+	int		index;
 
-	win_height = 1000;
-	win_width = 1780;
-	game->mlx = mlx_init(win_width, win_height, "cub3D", false);
-	if (!game->mlx )
-		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
-	game->game_img = mlx_new_image(game->mlx, win_width, win_height);
-	if (!game->game_img)
-		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
-	if (mlx_image_to_window(game->mlx, game->game_img , 0, 0) < 0)
-        clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
-	
-
-	game->mimimap_texture = mlx_load_png("./minimap_background.png");
-	if (!game->mimimap_texture)
-		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
-	
-	game->minimap_img = mlx_texture_to_image(game->mlx, game->mimimap_texture);
-	if (!game->minimap_img)
-		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
-	
-	if (!mlx_resize_image(game->minimap_img, MMAP_WIDTH, MMAP_HEIGHT))
-		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
-
-	if (mlx_image_to_window(game->mlx, game->minimap_img , 10, 10) < 0)
-        clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
-	
-
-	mlx_set_cursor_mode(cub->game->mlx, MLX_MOUSE_DISABLED);
-	// cub->txt1 = mlx_load_png("./wl.png");
-	cub->game->n_txt = mlx_load_png(cub->map_data->tx_north);
-	if (!cub->game->n_txt)
-		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
-	cub->game->s_txt = mlx_load_png(cub->map_data->tx_south);
-	if (!cub->game->s_txt)
-		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
-	cub->game->e_txt = mlx_load_png(cub->map_data->tx_east);
-	if (!cub->game->e_txt)
-		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
-	cub->game->w_txt = mlx_load_png(cub->map_data->tx_west);
-	if (!cub->game->w_txt)
-		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
-	
-
-	// 5000 * 3000 > 5000 * 3000
+	initial_mlx_load(cub, game);
+	cub->game->n_txt = load_texture(cub, cub->map_data->tx_north);
+	cub->game->s_txt = load_texture(cub, cub->map_data->tx_south);
+	cub->game->e_txt = load_texture(cub, cub->map_data->tx_east);
+	cub->game->w_txt = load_texture(cub, cub->map_data->tx_west);
+	game->door_texts = malloc(sizeof * game->door_texts * (S_DOOR_COUNT + 1));
+	if (!game->door_texts)
+		clean_exit(cub, NULL, errno);
+	index = -1;
+	while (++index <= S_DOOR_COUNT)
+		game->door_texts[index] = NULL;
+	ft_strcpy(door_path, "./assets/doors/Door_Texture_A.png");
+	index = -1;
+	while (++index < S_DOOR_COUNT)
+	{
+		door_path[28] = 'A' + S_DOOR_COUNT - index - 1;
+		game->door_texts[index] = load_texture(cub, door_path);
+	}
+	allocate_doors(cub, game);
 }
 
 void	do_init_game(t_cub *cub, t_game *game, t_map *map)

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:32:11 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/13 20:09:30 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/25 01:57:23 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	log_error(char *error)
 void	cleanup(t_cub *cub)
 {
 	cleanup_map(cub->map_data);
+	cleanup_game(cub->game);
 	if (cub->fd != -1)
 		close(cub->fd);
 }

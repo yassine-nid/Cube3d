@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 07:31:42 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/20 00:41:51 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/03/21 19:10:17 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,3 @@ bool	check_y(char **map, int len, int x, int y)
 		return (false);
 	return (true);
 }
-
