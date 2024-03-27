@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:48:47 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 03:55:38 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 20:08:26 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +75,12 @@ static void	init(t_cub *cub, t_map *map, t_game *game)
 	cub->game = game;
 }
 
-void	leak_detector(void)
-{
-	system("leaks cub3D");
-}
-
 int	main(int argc, char *argv[])
 {
 	t_cub	cub;
 	t_map	map;
 	t_game	game;
 
-	atexit(leak_detector);
 	srand(time(NULL));
 	init(&cub, &map, &game);
 	do_parse(&cub, argc, argv);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 20:15:04 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 03:55:19 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 20:13:42 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static void	loop_and_draw_line(t_game *g, t_line_data data)
 /// @brief prepare varriable to draw direction line
 static void	draw_mmap_direction(t_game *game, t_vector2 center, t_vector2 dire)
 {
-	// understand how this works or delete
 	t_line_data	line_data;
 
 	line_data.p0_x = center.x;

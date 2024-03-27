@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
+#    By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 08:51:59 by yzirri            #+#    #+#              #
-#    Updated: 2024/03/27 03:54:13 by yzirri           ###   ########.fr        #
+#    Updated: 2024/03/27 20:09:10 by ynidkouc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 ANS_START = '\e[1;94m'
 ANS_END = '\e[0m'
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast
 
 # MLX
 NAME_LIBMLX = libmlx

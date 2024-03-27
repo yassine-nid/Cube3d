@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw_sprites_utils_bonus.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 03:33:30 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 03:55:04 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 04:05:23 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,17 @@ double	angle_diff(double ang1, double ang2)
 void	sprite_init(t_cub *cub, t_sprite *sprite)
 {
 	t_vector2	dis;
+	double		dis_y;
 
 	dis.x = cub->game->player_position.x - sprite->position.x;
 	dis.y = cub->game->player_position.y - sprite->position.y;
 	sprite->distance = sqrtf(dis.x * dis.x + dis.y * dis.y);
-	sprite->angle = asin(fabs(dis.y) / sprite->distance);
+	dis_y = fabs(dis.y) / sprite->distance;
+	if (dis_y > 1)
+		dis_y = 1;
+	else if (dis_y < -1)
+		dis_y = -1;
+	sprite->angle = asin(dis_y);
 	sprite->angle = sprite->angle * (double)(180 / PI);
 	if (dis.y > 0 && dis.x > 0)
 		sprite->angle = 180 - sprite->angle;

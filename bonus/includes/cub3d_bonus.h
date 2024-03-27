@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 03:58:06 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 04:08:27 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ typedef struct s_rayhit
 // Enemy Sprites Count
 # define DOOR_PATH "./assets/doors/Door_Texture_A.png"
 # define TROPHY_PATH "./assets/sprites/trophy_texture_A.png"
-# define S_ENEMY_COUNT 4
+# define S_ENEMY_COUNT 8
 # define ENEMY_COLLISION_DISTANCE 0.1
 # define THROPHY_COLLISION_DIST 0.1
-# define ENEMY_ANIM_SPEED 500
+# define ENEMY_ANIM_SPEED 900
 # define DOOR_INTERACT_DISTANCE 2
 # define DOOR_ANIM_SPEED 1200
 

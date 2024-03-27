@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:02:22 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 03:55:41 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 21:32:45 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,28 @@ void	close_map_file(t_cub *cub)
 	cub->fd = -1;
 }
 
+/// @brief checks if the throhpy count is correct
+static void	validate_throphy_count(t_cub *cub, t_map *map)
+{
+	int	y;
+	int	x;
+	int	count;
+
+	count = 0;
+	y = -1;
+	while (++y < map->map_size)
+	{
+		x = -1;
+		while (map->map[y][++x])
+		{
+			if (map->map[y][x] == TROPHY)
+				count++;
+		}
+	}
+	if (count > 1)
+		clean_exit(cub, "Multiple throphys are not allowed", 1);
+}
+
 /// @brief parse everything in the given file into a map struct
 void	do_parse(t_cub *cub, int argc, char *argv[])
 {
@@ -59,5 +81,6 @@ void	do_parse(t_cub *cub, int argc, char *argv[])
 	varriables_parse(cub, cub->map_data, NULL, argv);
 	map_parse(cub, cub->map_data, argv);
 	map_shape_validation(cub, cub->map_data, argv);
+	validate_throphy_count(cub, cub->map_data);
 	colors_parse(cub, cub->map_data);
 }
