@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:01:48 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 03:32:42 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 01:18:53 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 /// @brief returns the correct texture for the given data
 static mlx_texture_t	*get_texture(t_stripe_data *data, t_cub *cub)
 {
+	t_door	*door;
+
+	if (data->hit->target == DOOR)
+	{
+		door = get_door_data(cub, *data->hit);
+		if (door && !door->is_open)
+			return (cub->game->door_text);
+	}
 	if (data->direction == NORTH)
 		return (cub->game->n_txt);
 	else if (data->direction == SOUTH)

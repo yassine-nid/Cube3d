@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_tgame.c                                      :+:      :+:    :+:   */
+/*   str_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 01:57:03 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 03:46:10 by yzirri           ###   ########.fr       */
+/*   Created: 2024/03/13 20:17:57 by yzirri            #+#    #+#             */
+/*   Updated: 2024/03/21 20:42:48 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	cleanup_game(t_game *game)
+bool	ft_isspace(char c)
 {
-	if (game->n_txt)
-		mlx_delete_texture(game->n_txt);
-	if (game->w_txt)
-		mlx_delete_texture(game->w_txt);
-	if (game->e_txt)
-		mlx_delete_texture(game->e_txt);
-	if (game->s_txt)
-		mlx_delete_texture(game->s_txt);
-	if (game->game_img)
-		mlx_delete_image(game->mlx, game->game_img);
-	if (game->mlx)
-		mlx_terminate(game->mlx);
+	return (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r');
+}
+
+void	ft_strcpy(char *dst, const char *src)
+{
+	while (src && *src != '\0')
+	{
+		*dst = *src;
+		src++;
+		dst++;
+	}
+	*dst = '\0';
 }

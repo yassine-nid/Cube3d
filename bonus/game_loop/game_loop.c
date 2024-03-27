@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_tgame.c                                      :+:      :+:    :+:   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 01:57:03 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 03:46:10 by yzirri           ###   ########.fr       */
+/*   Created: 2024/03/20 00:52:50 by ynidkouc          #+#    #+#             */
+/*   Updated: 2024/03/20 22:07:12 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	cleanup_game(t_game *game)
+/// @brief sets up and starts the game loop
+void	do_game(t_cub *cub)
 {
-	if (game->n_txt)
-		mlx_delete_texture(game->n_txt);
-	if (game->w_txt)
-		mlx_delete_texture(game->w_txt);
-	if (game->e_txt)
-		mlx_delete_texture(game->e_txt);
-	if (game->s_txt)
-		mlx_delete_texture(game->s_txt);
-	if (game->game_img)
-		mlx_delete_image(game->mlx, game->game_img);
-	if (game->mlx)
-		mlx_terminate(game->mlx);
+	do_init_game(cub, cub->game, cub->map_data);
+	register_events(cub);
+	mlx_loop(cub->game->mlx);
 }

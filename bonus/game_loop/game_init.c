@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:45 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/27 03:42:31 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 02:55:31 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,47 @@ static void	initial_mlx_load(t_cub *cub, t_game *game)
 		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
 	if (mlx_image_to_window(game->mlx, game->game_img, 0, 0) < 0)
 		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	game->mimimap_texture = load_texture(cub, MMAP_PATH);
+	game->minimap_img = texture_to_image(cub, game->mimimap_texture);
+	if (!mlx_resize_image(game->minimap_img, MMAP_WIDTH, MMAP_HEIGHT))
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	if (mlx_image_to_window(game->mlx, game->minimap_img, 10, 10) < 0)
+		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
+	mlx_set_cursor_mode(cub->game->mlx, MLX_MOUSE_DISABLED);
 }
 
 /// @brief creates mlx_ptr and the image to be used for drawing
-static void	init_mlx(t_cub *cub, t_game *game)
+static void	init_mlx(t_cub *cub, t_game *game, int x, int y)
 {
 	initial_mlx_load(cub, game);
 	cub->game->n_txt = load_texture(cub, cub->map_data->tx_north);
 	cub->game->s_txt = load_texture(cub, cub->map_data->tx_south);
 	cub->game->e_txt = load_texture(cub, cub->map_data->tx_east);
 	cub->game->w_txt = load_texture(cub, cub->map_data->tx_west);
+	game->door_text = load_texture(cub, DOOR_PATH);
+	game->trophy_sprite.txt = load_texture(cub, TROPHY_PATH);
+	allocate_doors(cub, game);
+	allocate_enemies(cub, game, cub->map_data);
+	while (++y < cub->map_data->map_size)
+	{
+		x = -1;
+		while (cub->map_data->map[y][++x])
+		{
+			if (cub->map_data->map[y][x] == TROPHY)
+			{
+				game->trophy_sprite.position.x = x;
+				game->trophy_sprite.position.y = y;
+				if (game->trophy_sprite.position.x > 0)
+					game->trophy_sprite.position.x -= 0.5;
+				if (game->trophy_sprite.position.x > 0)
+					game->trophy_sprite.position.y -= 0.5;
+			}
+		}
+	}
 }
 
 void	do_init_game(t_cub *cub, t_game *game, t_map *map)
 {
-	init_mlx(cub, game);
+	init_mlx(cub, game, 0, -1);
 	init_game_vars(map, game);
 }

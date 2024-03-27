@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:39 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/27 03:43:06 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 01:20:06 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,23 @@ static void	key_hook(mlx_key_data_t keydata, void *param)
 	inputs->key_turn_left = mlx_is_key_down(game->mlx, MLX_KEY_LEFT);
 	inputs->key_turn_right = mlx_is_key_down(game->mlx, MLX_KEY_RIGHT);
 	inputs->key_close_game = mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_E))
+		on_interact_clicked(cub);
+}
+
+/// @brief MLX event for when the cursor is moved
+static void	cursor_hook(double xpos, double ypos, void *param)
+{
+	t_cub		*cub;
+	t_inputs	*inputs;
+
+	(void)ypos;
+	cub = (t_cub *)param;
+	inputs = &cub->game->m_inputs;
+	inputs->change_x += (inputs->old_x - xpos);
+	if (inputs->old_x == -1)
+		inputs->change_x = 0;
+	inputs->old_x = xpos;
 }
 
 long long	get_time(void)
@@ -54,11 +71,13 @@ static void	loop_hook(void *param)
 	game->frame_rate = 1.0 / game->frame_time;
 	do_handle_keys(cub, game);
 	do_draw_game(cub, game, cub->map_data);
+	do_draw_mini_map(cub, game, cub->map_data);
 }
 
 /// @brief listen to relavent events
 void	register_events(t_cub *cub)
 {
 	mlx_key_hook(cub->game->mlx, key_hook, cub);
+	mlx_cursor_hook(cub->game->mlx, cursor_hook, cub);
 	mlx_loop_hook(cub->game->mlx, loop_hook, cub);
 }

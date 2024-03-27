@@ -6,7 +6,7 @@
 #    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 08:51:59 by yzirri            #+#    #+#              #
-#    Updated: 2024/03/27 00:47:24 by yzirri           ###   ########.fr        #
+#    Updated: 2024/03/27 03:45:37 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,23 @@ NAME_BONUS = cub3D_bonus
 OBJ_DIR_BONUS = objects_bonus
 
 SRC_BONUS = bonus/main/main.c bonus/cleanup/clean_exits.c bonus/utils/str_utils.c \
-#	bonus/parser/parser.c bonus/get_next_line/get_next_line.c \
+	bonus/parser/parser.c bonus/get_next_line/get_next_line.c \
 	bonus/get_next_line/get_next_line_utils.c bonus/parser/parser_varriables.c \
 	bonus/parser/parser_map.c bonus/parser/parser_map_utils.c \
 	bonus/parser/parser_utils.c bonus/utils/ft_split.c bonus/parser/parser_colors.c \
-	bonus/utils/ft_atoi.c bonus/utils/str_utils2.c
+	bonus/utils/ft_atoi.c bonus/utils/str_utils2.c \
+	bonus/game_loop/game_loop.c bonus/game_loop/game_init.c bonus/game_loop/game_hooks.c \
+	bonus/game_loop/game_draw.c bonus/game_loop/game_utils.c \
+	bonus/game_loop/game_handle_keys.c \
+	bonus/game_loop/game_minimap.c \
+	bonus/raycaster/raycaster.c \
+	bonus/game_loop/game_draw_stripe.c \
+	bonus/game_loop/game_draw_map.c \
+	bonus/game_loop/game_doors.c \
+	bonus/game_loop/game_draw_sprites.c \
+	bonus/cleanup/clean_tgame.c \
+	bonus/game_loop/game_draw_sprites_utils.c \
+	bonus/game_loop/game_enemies.c
 
 OBJ_BONUS = $(patsubst %.c, $(OBJ_DIR_BONUS)/%.o, $(SRC_BONUS))
 
@@ -45,16 +57,9 @@ SRC_MANDATORY = mandatory/main/main.c mandatory/cleanup/clean_exits.c mandatory/
 	mandatory/utils/ft_atoi.c mandatory/utils/str_utils2.c \
 	mandatory/game_loop/game_loop.c mandatory/game_loop/game_init.c mandatory/game_loop/game_hooks.c \
 	mandatory/game_loop/game_draw.c mandatory/game_loop/game_utils.c \
-	mandatory/game_loop/game_handle_keys.c \
-	mandatory/game_loop/game_minimap.c \
-	mandatory/raycaster/raycaster.c \
-	mandatory/game_loop/game_draw_stripe.c \
-	mandatory/game_loop/game_draw_map.c \
-	mandatory/game_loop/game_doors.c \
-	mandatory/game_loop/game_draw_sprites.c \
+	mandatory/game_loop/game_handle_keys.c mandatory/raycaster/raycaster.c \
+	mandatory/game_loop/game_draw_stripe.c mandatory/game_loop/game_draw_map.c \
 	mandatory/cleanup/clean_tgame.c \
-	mandatory/game_loop/game_draw_sprites_utils.c \
-	mandatory/game_loop/game_enemies.c
 
 OBJ_MANDATORY = $(patsubst %.c, $(OBJ_DIR_MANDATORY)/%.o, $(SRC_MANDATORY))
 

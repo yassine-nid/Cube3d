@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 22:28:37 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 03:32:01 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 01:22:19 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,19 @@ static char	get_direction(t_rayhit *hit, double angle)
 t_rayhit	get_valid_hit(t_cub *cub, double angle)
 {
 	t_rayhit	wall_hit;
+	t_rayhit	door_hit;
+	t_door		*door;
 
 	wall_hit = ray_cast(cub, angle, WALL);
-	return (wall_hit);
+	door_hit = ray_cast(cub, angle, DOOR);
+	if (!door_hit.did_hit_target)
+		return (wall_hit);
+	if (door_hit.hit_distance >= wall_hit.hit_distance)
+		return (wall_hit);
+	door = get_door_data(cub, door_hit);
+	if (!door)
+		return (wall_hit);
+	return (door_hit);
 }
 
 /// @brief calls draw stripe after calculating the direction

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:33 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/27 03:43:33 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 02:45:39 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,20 @@ static void	do_move(t_cub *cub, t_game *game)
 			return ;
 		move_speed = MOVE_SPEED * game->frame_time;
 		new_pos = calc_direction(game->player_position, move_speed, move_ang);
+		hit = ray_cast(cub, move_ang, ENEMY);
 		game->player_position = new_pos;
+		if (hit.did_hit_target && hit.hit_distance <= ENEMY_COLLISION_DISTANCE)
+			cleanup_exit(cub, "GameOver\n");
+		hit = ray_cast(cub, move_ang, TROPHY);
+		if (hit.did_hit_target && hit.hit_distance <= THROPHY_COLLISION_DIST)
+			cleanup_exit(cub, "You Win\n");
 	}
 }
 
 /// @brief process buffered inputs
 void	do_handle_keys(t_cub *cub, t_game *game)
 {
+	double		tmp_angle;
 	t_inputs	*inputs;
 	double		rotate_speed;
 
@@ -85,5 +92,12 @@ void	do_handle_keys(t_cub *cub, t_game *game)
 		game->angle = clamp_angle(game->angle + rotate_speed);
 	if (inputs->key_turn_right)
 		game->angle = clamp_angle(game->angle - rotate_speed);
+	if (inputs->change_x != 0)
+	{
+		rotate_speed = MOUSE_ROTATE_SPEED * game->frame_time;
+		tmp_angle = game->angle + (inputs->change_x * rotate_speed);
+		game->angle = clamp_angle(tmp_angle);
+		inputs->change_x = 0;
+	}
 	do_move(cub, game);
 }

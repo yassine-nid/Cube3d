@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:48:10 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 03:38:04 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 02:07:14 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ static void	validate_map_symbols(t_cub *cub, t_map *map, int x, int y)
 		{
 			if (ft_isspace(map->map[y][x]) || map->map[y][x] == WALL)
 				continue ;
-			if (map->map[y][x] == EMPTY)
+			if (map->map[y][x] == ENEMY || map->map[y][x] == TROPHY)
+				continue ;
+			if (map->map[y][x] == EMPTY || map->map[y][x] == DOOR)
 				continue ;
 			if (map->map[y][x] == NORTH || map->map[y][x] == SOUTH
 				|| map->map[y][x] == EAST || map->map[y][x] == WEST)

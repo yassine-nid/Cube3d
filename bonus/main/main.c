@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:48:47 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 03:39:27 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:03:37 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,24 @@ static void	init_map(t_map *map)
 	map->start_location_type = '\0';
 }
 
+static void	init_game_second(t_game *game)
+{
+	game->doors = NULL;
+	game->door_text = NULL;
+	game->current_time = 0;
+	game->preveus_time = 0;
+	game->frame_time = 0;
+	game->frame_rate = 0;
+	game->enemies = NULL;
+	game->enemy_sprites = NULL;
+	game->trophy_sprite.txt = NULL;
+}
+
 /// @brief initialize game varriables
 static void	init_game(t_game *game)
 {
+	game->mimimap_texture = NULL;
+	game->minimap_img = NULL;
 	game->game_img = NULL;
 	game->e_txt = NULL;
 	game->n_txt = NULL;
@@ -46,10 +61,9 @@ static void	init_game(t_game *game)
 	game->m_inputs.key_turn_left = false;
 	game->m_inputs.key_turn_right = false;
 	game->m_inputs.key_close_game = false;
-	game->current_time = 0;
-	game->preveus_time = 0;
-	game->frame_time = 0;
-	game->frame_rate = 0;
+	game->m_inputs.change_x = 0;
+	game->m_inputs.old_x = -1;
+	init_game_second(game);
 }
 
 static void	init(t_cub *cub, t_map *map, t_game *game)

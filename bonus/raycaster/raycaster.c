@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:05 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/27 03:38:41 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/25 01:29:37 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static bool	post_checks(t_cub *cub, t_vector2 *pos, t_rayhit *hit, char target)
 {
 	int		x;
 	int		y;
+	t_door	*door_data;
 
 	x = (int)ceil(pos->x);
 	y = (int)ceil(pos->y);
@@ -26,6 +27,15 @@ static bool	post_checks(t_cub *cub, t_vector2 *pos, t_rayhit *hit, char target)
 		return (false);
 	if (cub->map_data->map[y][x] == target)
 	{
+		if (target == DOOR)
+		{
+			hit->point.x = x;
+			hit->point.y = y;
+			hit->target = target;
+			door_data = get_door_data(cub, *hit);
+			if (door_data && door_data->is_open)
+				return (true);
+		}
 		hit->did_hit_target = true;
 		return (false);
 	}
