@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_colors.c                                    :+:      :+:    :+:   */
+/*   parser_colors_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:06:28 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/13 20:15:20 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:43 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief combines the provided Red, Green, Blue channels into a single color
 static unsigned int	combine_rgb(unsigned int r, unsigned int g, unsigned int b)

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_draw.c                                        :+:      :+:    :+:   */
+/*   game_draw_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:26 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/27 02:53:27 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:54:54 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief draws the sky and floot
 static void	do_draw_sky_and_floor(t_game *game, t_map *map)

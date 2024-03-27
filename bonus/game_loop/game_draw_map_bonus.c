@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_draw_map.c                                    :+:      :+:    :+:   */
+/*   game_draw_map_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 22:28:37 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 01:22:19 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:00 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief claculates the distance and the height of the wall/texture
 static void	distance_and_height(t_game *game, double ang, t_stripe_data *data)

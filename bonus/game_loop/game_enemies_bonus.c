@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_enemies.c                                     :+:      :+:    :+:   */
+/*   game_enemies_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 00:47:10 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 01:40:43 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:08 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief updates all enemies varriables
 void	update_enemies(t_cub *cub, t_game *game)

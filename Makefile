@@ -6,7 +6,7 @@
 #    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 08:51:59 by yzirri            #+#    #+#              #
-#    Updated: 2024/03/27 03:45:37 by yzirri           ###   ########.fr        #
+#    Updated: 2024/03/27 03:54:13 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,24 +25,24 @@ LIBMLX_LIBS := ./MLX42/build/libmlx42.a -L"/Users/$(USER)/.brew/Cellar/glfw/" -l
 NAME_BONUS = cub3D_bonus
 OBJ_DIR_BONUS = objects_bonus
 
-SRC_BONUS = bonus/main/main.c bonus/cleanup/clean_exits.c bonus/utils/str_utils.c \
-	bonus/parser/parser.c bonus/get_next_line/get_next_line.c \
-	bonus/get_next_line/get_next_line_utils.c bonus/parser/parser_varriables.c \
-	bonus/parser/parser_map.c bonus/parser/parser_map_utils.c \
-	bonus/parser/parser_utils.c bonus/utils/ft_split.c bonus/parser/parser_colors.c \
-	bonus/utils/ft_atoi.c bonus/utils/str_utils2.c \
-	bonus/game_loop/game_loop.c bonus/game_loop/game_init.c bonus/game_loop/game_hooks.c \
-	bonus/game_loop/game_draw.c bonus/game_loop/game_utils.c \
-	bonus/game_loop/game_handle_keys.c \
-	bonus/game_loop/game_minimap.c \
-	bonus/raycaster/raycaster.c \
-	bonus/game_loop/game_draw_stripe.c \
-	bonus/game_loop/game_draw_map.c \
-	bonus/game_loop/game_doors.c \
-	bonus/game_loop/game_draw_sprites.c \
-	bonus/cleanup/clean_tgame.c \
-	bonus/game_loop/game_draw_sprites_utils.c \
-	bonus/game_loop/game_enemies.c
+SRC_BONUS = bonus/main/main_bonus.c bonus/cleanup/clean_exits_bonus.c bonus/utils/str_utils_bonus.c \
+	bonus/parser/parser_bonus.c bonus/get_next_line/get_next_line_bonus.c \
+	bonus/get_next_line/get_next_line_utils_bonus.c bonus/parser/parser_varriables_bonus.c \
+	bonus/parser/parser_map_bonus.c bonus/parser/parser_map_utils_bonus.c \
+	bonus/parser/parser_utils_bonus.c bonus/utils/ft_split_bonus.c bonus/parser/parser_colors_bonus.c \
+	bonus/utils/ft_atoi_bonus.c bonus/utils/str_utils2_bonus.c \
+	bonus/game_loop/game_loop_bonus.c bonus/game_loop/game_init_bonus.c bonus/game_loop/game_hooks_bonus.c \
+	bonus/game_loop/game_draw_bonus.c bonus/game_loop/game_utils_bonus.c \
+	bonus/game_loop/game_handle_keys_bonus.c \
+	bonus/game_loop/game_minimap_bonus.c \
+	bonus/raycaster/raycaster_bonus.c \
+	bonus/game_loop/game_draw_stripe_bonus.c \
+	bonus/game_loop/game_draw_map_bonus.c \
+	bonus/game_loop/game_doors_bonus.c \
+	bonus/game_loop/game_draw_sprites_bonus.c \
+	bonus/cleanup/clean_tgame_bonus.c \
+	bonus/game_loop/game_draw_sprites_utils_bonus.c \
+	bonus/game_loop/game_enemies_bonus.c
 
 OBJ_BONUS = $(patsubst %.c, $(OBJ_DIR_BONUS)/%.o, $(SRC_BONUS))
 
@@ -74,7 +74,7 @@ $(NAME) : $(OBJ_MANDATORY)
 $(NAME_BONUS) : $(OBJ_BONUS)
 	$(CC) $(CFLAGS) $(OBJ_BONUS) $(LIBMLX_LIBS) $(LIBMLX_HEADER) -o $(NAME_BONUS)
 
-$(OBJ_DIR_BONUS)/%.o : %.c bonus/includes/cub3d.h
+$(OBJ_DIR_BONUS)/%.o : %.c bonus/includes/cub3d_bonus.h
 	mkdir -p $(dir $@)
 	printf $(ANS_START)"[%-37s] 🕝 \r"$(ANS_END) "Compiling $(notdir $@)"
 	$(CC) $(CFLAGS) -o $@ -c $< $(LIBMLX_HEADER)

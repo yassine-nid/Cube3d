@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_utils2.c                                       :+:      :+:    :+:   */
+/*   game_loop_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 20:17:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/21 20:42:48 by yzirri           ###   ########.fr       */
+/*   Created: 2024/03/20 00:52:50 by ynidkouc          #+#    #+#             */
+/*   Updated: 2024/03/27 03:55:16 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
-bool	ft_isspace(char c)
+/// @brief sets up and starts the game loop
+void	do_game(t_cub *cub)
 {
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
-}
-
-void	ft_strcpy(char *dst, const char *src)
-{
-	while (src && *src != '\0')
-	{
-		*dst = *src;
-		src++;
-		dst++;
-	}
-	*dst = '\0';
+	do_init_game(cub, cub->game, cub->map_data);
+	register_events(cub);
+	mlx_loop(cub->game->mlx);
 }

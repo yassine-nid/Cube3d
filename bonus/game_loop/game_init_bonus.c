@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_init.c                                        :+:      :+:    :+:   */
+/*   game_init_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:45 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/27 02:55:31 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:14 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief convert player start position from array[y][x] into image pixel loca
 static t_vector2	load_player_start_position(t_map *map)

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_hooks.c                                       :+:      :+:    :+:   */
+/*   game_hooks_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:39 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/27 01:20:06 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:12 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief MLX event for when a key is pressed
 static void	key_hook(mlx_key_data_t keydata, void *param)

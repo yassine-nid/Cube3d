@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycaster.c                                        :+:      :+:    :+:   */
+/*   raycaster_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:05 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/25 01:29:37 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:55 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief checks done after the raycast to validate the new point
 static bool	post_checks(t_cub *cub, t_vector2 *pos, t_rayhit *hit, char target)

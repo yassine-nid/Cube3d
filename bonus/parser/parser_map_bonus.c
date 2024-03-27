@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_map.c                                       :+:      :+:    :+:   */
+/*   parser_map_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:48:10 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 02:07:14 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:45 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief Counts the map size, and length of the longest map line
 static void	count_map_size(t_cub *cub, t_map *map, char *argv[])

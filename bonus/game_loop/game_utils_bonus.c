@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_utils.c                                       :+:      :+:    :+:   */
+/*   game_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 00:23:54 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/20 23:21:45 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:21 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief angle to radian
 double	ang_to_rad(double angle)

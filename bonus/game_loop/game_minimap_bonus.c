@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_minimap.c                                     :+:      :+:    :+:   */
+/*   game_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 20:15:04 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/24 22:20:01 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:19 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief draws the player color
 static void	draw_player(t_game *game, int x, int y)

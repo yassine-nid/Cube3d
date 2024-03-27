@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_draw_sprites.c                                :+:      :+:    :+:   */
+/*   game_draw_sprites_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 00:06:11 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/27 01:04:46 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:02 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 static void	draw_sprite_strip(int x, int y, t_sprite *sprite, t_cub *cub)
 {

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_doors.c                                       :+:      :+:    :+:   */
+/*   game_doors_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 22:08:19 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 01:15:42 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:54:52 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief the actual function where door allocation happens
 static void	do_allocate_door(t_cub *cub, t_game *game, int x, int y)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 02:59:14 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:54:29 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define WIN_HEIGHT 1000.0
 # define WIN_WIDTH 1780.0
 # define GAME_QUALITY 2
-# define GAME_NAME "cub3D"
+# define GAME_NAME "cub3D_bonus"
 # define PI 3.14159
 
 /// @brief a simple vector 2 of 2 doubles

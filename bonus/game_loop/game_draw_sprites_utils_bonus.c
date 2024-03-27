@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_draw_sprites_utils.c                          :+:      :+:    :+:   */
+/*   game_draw_sprites_utils_bonus.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 03:33:30 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/26 22:14:11 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:04 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief calculate the differece between two angles
 double	angle_diff(double ang1, double ang2)

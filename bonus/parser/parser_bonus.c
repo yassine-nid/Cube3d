@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:02:22 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/01 16:58:05 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:41 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief checks if there is only one map and nothing after it
 static void	map_shape_validation(t_cub *cub, t_map *map, char *argv[])

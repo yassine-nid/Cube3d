@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_varriables.c                                :+:      :+:    :+:   */
+/*   parser_varriables_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:50:06 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/20 00:18:26 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:52 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief removes the var name at the start of the line and any extra spaces
 static void	trim_assign_var(t_cub *cub, char *line, char **var)

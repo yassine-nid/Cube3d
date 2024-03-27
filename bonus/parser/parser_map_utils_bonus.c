@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_map_utils.c                                 :+:      :+:    :+:   */
+/*   parser_map_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 07:31:42 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/21 19:10:17 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:47 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief saves the line in the map, matching its size to the longest line size
 void	save_line(t_cub *cub, t_map *map, char **line, int map_index)

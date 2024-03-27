@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_draw_stripe.c                                 :+:      :+:    :+:   */
+/*   game_draw_stripe_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:01:48 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 01:18:53 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:06 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief returns the correct texture for the given data
 static mlx_texture_t	*get_texture(t_stripe_data *data, t_cub *cub)

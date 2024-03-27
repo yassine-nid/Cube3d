@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_handle_keys.c                                 :+:      :+:    :+:   */
+/*   game_handle_keys_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:33 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/27 02:45:39 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:55:10 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 /// @brief get the angle the next move is to be performed at
 static double	get_move_angle(t_inputs *inputs, double angle)
