@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+         #
+#    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 08:51:59 by yzirri            #+#    #+#              #
-#    Updated: 2024/03/25 02:51:07 by ynidkouc         ###   ########.fr        #
+#    Updated: 2024/03/27 00:47:24 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,9 @@ SRC_MANDATORY = mandatory/main/main.c mandatory/cleanup/clean_exits.c mandatory/
 	mandatory/game_loop/game_draw_map.c \
 	mandatory/game_loop/game_doors.c \
 	mandatory/game_loop/game_draw_sprites.c \
-	mandatory/cleanup/clean_tgame.c
+	mandatory/cleanup/clean_tgame.c \
+	mandatory/game_loop/game_draw_sprites_utils.c \
+	mandatory/game_loop/game_enemies.c
 
 OBJ_MANDATORY = $(patsubst %.c, $(OBJ_DIR_MANDATORY)/%.o, $(SRC_MANDATORY))
 

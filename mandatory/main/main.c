@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:48:47 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/22 19:59:56 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 03:03:37 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,19 @@ static void	init_map(t_map *map)
 	map->start_location_type = '\0';
 }
 
+static void	init_game_second(t_game *game)
+{
+	game->doors = NULL;
+	game->door_text = NULL;
+	game->current_time = 0;
+	game->preveus_time = 0;
+	game->frame_time = 0;
+	game->frame_rate = 0;
+	game->enemies = NULL;
+	game->enemy_sprites = NULL;
+	game->trophy_sprite.txt = NULL;
+}
+
 /// @brief initialize game varriables
 static void	init_game(t_game *game)
 {
@@ -47,17 +60,10 @@ static void	init_game(t_game *game)
 	game->m_inputs.key_right = false;
 	game->m_inputs.key_turn_left = false;
 	game->m_inputs.key_turn_right = false;
-	game->m_inputs.key_close_game= false;
+	game->m_inputs.key_close_game = false;
 	game->m_inputs.change_x = 0;
 	game->m_inputs.old_x = -1;
-
-	game->doors = NULL;
-	game->door_texts = NULL;
-
-	game->current_time = 0;
-	game->preveus_time = 0;
-	game->frame_time = 0;
-	game->frame_rate = 0;
+	init_game_second(game);
 }
 
 static void	init(t_cub *cub, t_map *map, t_game *game)
@@ -71,7 +77,7 @@ static void	init(t_cub *cub, t_map *map, t_game *game)
 
 void	leak_detector(void)
 {
-	//system("leaks cub3D");
+	system("leaks cub3D");
 }
 
 int	main(int argc, char *argv[])
@@ -81,16 +87,10 @@ int	main(int argc, char *argv[])
 	t_game	game;
 
 	atexit(leak_detector);
+	srand(time(NULL));
 	init(&cub, &map, &game);
 	do_parse(&cub, argc, argv);
 	do_game(&cub);
-	// printf("<NO>: [%s]\n", map.tx_north);
-	// printf("<SO>: [%s]\n", map.tx_south);
-	// printf("<WE>: [%s]\n", map.tx_west);
-	// printf("<EA>: [%s]\n", map.tx_east);
-	// printf("<F>: [%s]\n", map.flor_color);
-	// printf("<C>: [%s]\n", map.ceiling_color);
-	// printf("<First Line>: [%d]\n", map.map_start_index);
 	cleanup(&cub);
 	return (EXIT_SUCCESS);
 }

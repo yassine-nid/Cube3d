@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 22:28:37 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/25 01:29:26 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 01:22:19 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,8 @@ void	do_draw_map(t_cub *cub, t_game *game, int ray_count, double stripe_siz)
 		data.end_x_pos = data.start_x_pos + stripe_siz;
 		data.img = game->game_img;
 		data.hit = &hit;
-		hit = ray_cast(cub, angle, WALL);
-		if (hit.did_hit_target)
-			do_draw(cub, angle, &data, &hit);
 		hit = get_valid_hit(cub, angle);
-		if (hit.did_hit_target && hit.target != WALL)
+		if (hit.did_hit_target)
 			do_draw(cub, angle, &data, &hit);
 		angle = clamp_angle(angle - ((double)60 / (double)ray_count));
 	}

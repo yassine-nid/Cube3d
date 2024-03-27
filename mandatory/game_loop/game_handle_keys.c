@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:33 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/22 20:27:12 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 02:45:39 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,13 @@ static void	do_move(t_cub *cub, t_game *game)
 			return ;
 		move_speed = MOVE_SPEED * game->frame_time;
 		new_pos = calc_direction(game->player_position, move_speed, move_ang);
+		hit = ray_cast(cub, move_ang, ENEMY);
 		game->player_position = new_pos;
+		if (hit.did_hit_target && hit.hit_distance <= ENEMY_COLLISION_DISTANCE)
+			cleanup_exit(cub, "GameOver\n");
+		hit = ray_cast(cub, move_ang, TROPHY);
+		if (hit.did_hit_target && hit.hit_distance <= THROPHY_COLLISION_DIST)
+			cleanup_exit(cub, "You Win\n");
 	}
 }
 

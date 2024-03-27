@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:48:10 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/20 00:41:24 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/03/27 02:07:14 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static void	validate_map_symbols(t_cub *cub, t_map *map, int x, int y)
 		while (map->map[y][++x])
 		{
 			if (ft_isspace(map->map[y][x]) || map->map[y][x] == WALL)
+				continue ;
+			if (map->map[y][x] == ENEMY || map->map[y][x] == TROPHY)
 				continue ;
 			if (map->map[y][x] == EMPTY || map->map[y][x] == DOOR)
 				continue ;

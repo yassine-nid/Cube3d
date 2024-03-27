@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:01:48 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/25 01:32:43 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 01:18:53 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static mlx_texture_t	*get_texture(t_stripe_data *data, t_cub *cub)
 	{
 		door = get_door_data(cub, *data->hit);
 		if (door && !door->is_open)
-			return (cub->game->door_texts[door->current_texture]);
+			return (cub->game->door_text);
 	}
 	if (data->direction == NORTH)
 		return (cub->game->n_txt);

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 22:08:19 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/25 01:31:38 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 01:15:42 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,9 @@ static void	do_allocate_door(t_cub *cub, t_game *game, int x, int y)
 				game->doors[index] = malloc (sizeof * game->doors[index]);
 				if (!game->doors[index])
 					clean_exit(cub, NULL, errno);
-				game->doors[index]->current_texture = 0;
 				game->doors[index]->door_x = x;
 				game->doors[index]->door_y = y;
 				game->doors[index]->is_open = false;
-				game->doors[index]->is_opening = false;
-				game->doors[index]->door_update_time = 0;
 				index++;
 			}
 		}
@@ -92,35 +89,6 @@ t_door	*get_door_data(t_cub *cub, t_rayhit hit)
 	return (NULL);
 }
 
-/// @brief updates all doors varriables
-void	door_update(t_cub *cub, t_game *game)
-{
-	int		index;
-	t_door	*door;
-
-	(void)cub;
-	index = -1;
-	while (game->doors[++index])
-	{
-		door = game->doors[index];
-		if (door->is_opening)
-		{
-			door->door_update_time += DOOR_ANIM_SPEED * game->frame_time;
-			if (door->door_update_time >= 100)
-			{
-				door->door_update_time = 0;
-				door->current_texture++;
-				if (!game->door_texts[door->current_texture])
-				{
-					door->is_open = true;
-					door->current_texture = 0;
-					door->is_opening = false;
-				}
-			}
-		}
-	}
-}
-
 /// @brief this is called when the enteract button is clicked
 void	on_interact_clicked(t_cub *cub)
 {
@@ -131,8 +99,8 @@ void	on_interact_clicked(t_cub *cub)
 	if (hit.did_hit_target && hit.hit_distance <= DOOR_INTERACT_DISTANCE)
 	{
 		door_data = get_door_data(cub, hit);
-		if (!door_data || door_data->is_opening)
+		if (!door_data)
 			return ;
-		door_data->is_opening = true;
+		door_data->is_open = true;
 	}
 }

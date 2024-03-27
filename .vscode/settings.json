@@ -13,6 +13,9 @@
 		"vector": "c",
 		"__locale": "c",
 		"locale": "c",
-		"*.cub": "c"
+		"*.cub": "c",
+		"limits.h": "c",
+		"cub3d.h": "c",
+		"__node_handle": "c"
 	}
 }

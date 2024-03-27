@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:45 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/25 01:41:34 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 02:55:31 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,34 +74,37 @@ static void	initial_mlx_load(t_cub *cub, t_game *game)
 }
 
 /// @brief creates mlx_ptr and the image to be used for drawing
-static void	init_mlx(t_cub *cub, t_game *game)
+static void	init_mlx(t_cub *cub, t_game *game, int x, int y)
 {
-	char	door_path[34];
-	int		index;
-
 	initial_mlx_load(cub, game);
 	cub->game->n_txt = load_texture(cub, cub->map_data->tx_north);
 	cub->game->s_txt = load_texture(cub, cub->map_data->tx_south);
 	cub->game->e_txt = load_texture(cub, cub->map_data->tx_east);
 	cub->game->w_txt = load_texture(cub, cub->map_data->tx_west);
-	game->door_texts = malloc(sizeof * game->door_texts * (S_DOOR_COUNT + 1));
-	if (!game->door_texts)
-		clean_exit(cub, NULL, errno);
-	index = -1;
-	while (++index <= S_DOOR_COUNT)
-		game->door_texts[index] = NULL;
-	ft_strcpy(door_path, "./assets/doors/Door_Texture_A.png");
-	index = -1;
-	while (++index < S_DOOR_COUNT)
-	{
-		door_path[28] = 'A' + S_DOOR_COUNT - index - 1;
-		game->door_texts[index] = load_texture(cub, door_path);
-	}
+	game->door_text = load_texture(cub, DOOR_PATH);
+	game->trophy_sprite.txt = load_texture(cub, TROPHY_PATH);
 	allocate_doors(cub, game);
+	allocate_enemies(cub, game, cub->map_data);
+	while (++y < cub->map_data->map_size)
+	{
+		x = -1;
+		while (cub->map_data->map[y][++x])
+		{
+			if (cub->map_data->map[y][x] == TROPHY)
+			{
+				game->trophy_sprite.position.x = x;
+				game->trophy_sprite.position.y = y;
+				if (game->trophy_sprite.position.x > 0)
+					game->trophy_sprite.position.x -= 0.5;
+				if (game->trophy_sprite.position.x > 0)
+					game->trophy_sprite.position.y -= 0.5;
+			}
+		}
+	}
 }
 
 void	do_init_game(t_cub *cub, t_game *game, t_map *map)
 {
-	init_mlx(cub, game);
+	init_mlx(cub, game, 0, -1);
 	init_game_vars(map, game);
 }

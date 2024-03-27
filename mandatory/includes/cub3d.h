@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/25 02:54:28 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/03/27 02:59:14 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <math.h>
 # include "MLX42/MLX42.h"
 # include <sys/time.h>
+# include <limits.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
@@ -97,7 +98,13 @@ typedef struct s_rayhit
 
 # pragma region t_game
 
-# define S_DOOR_COUNT 16
+// Enemy Sprites Count
+# define DOOR_PATH "./assets/doors/Door_Texture_A.png"
+# define TROPHY_PATH "./assets/sprites/trophy_texture_A.png"
+# define S_ENEMY_COUNT 4
+# define ENEMY_COLLISION_DISTANCE 0.1
+# define THROPHY_COLLISION_DIST 0.1
+# define ENEMY_ANIM_SPEED 500
 # define DOOR_INTERACT_DISTANCE 2
 # define DOOR_ANIM_SPEED 1200
 
@@ -106,10 +113,27 @@ typedef struct s_door
 	int			door_x;
 	int			door_y;
 	bool		is_open;
-	bool		is_opening;
-	int			current_texture;
-	double		door_update_time;
 }	t_door;
+
+typedef struct s_sprite
+{
+	mlx_texture_t	*txt;
+	t_vector2		position;
+	uint32_t		height;
+	uint32_t		width;
+	int				start_x;
+	int				start_y;
+	double			distance;
+	double			angle;
+}				t_sprite;
+
+typedef struct s_enemy
+{
+	t_vector2	position;
+	int			sprite_index;
+	t_sprite	sprite_data;
+	double		sprite_index_time;
+}	t_enemy;
 
 /// @brief holds game data
 typedef struct s_game
@@ -126,11 +150,14 @@ typedef struct s_game
 	mlx_texture_t	*e_txt;
 	mlx_texture_t	*s_txt;
 	t_door			**doors;
-	mlx_texture_t	**door_texts;
+	mlx_texture_t	*door_text;
 	long long		current_time;
 	long long		preveus_time;
 	double			frame_time;
 	double			frame_rate;
+	t_enemy			**enemies;
+	mlx_texture_t	**enemy_sprites;
+	t_sprite		trophy_sprite;
 }	t_game;
 
 # pragma endregion
@@ -183,18 +210,6 @@ typedef struct s_cub
 	int				fd;
 }	t_cub;
 
-typedef struct	s_sprite
-{
-	mlx_texture_t	*txt;
-	t_vector2		position;
-	uint32_t		height;
-	uint32_t		width;
-	int				start_x;
-	int				start_y;
-	double			distance;
-	double			angle;
-}				t_sprite;
-
 # pragma endregion
 
 # pragma region Mini map varriables
@@ -231,6 +246,8 @@ typedef struct	s_sprite
 # define WEST 'W'
 # define EAST 'E'
 # define DOOR 'D'
+# define ENEMY 'M'
+# define TROPHY 'T'
 
 # pragma endregion
 
@@ -239,6 +256,7 @@ typedef struct	s_sprite
 void			clean_exit(t_cub *cub, char *error, int code);
 void			cleanup(t_cub *cub);
 void			cleanup_game(t_game *game);
+void			cleanup_exit(t_cub *cub, char *msg);
 
 # pragma endregion
 
@@ -308,12 +326,14 @@ mlx_image_t		*texture_to_image(t_cub *cub, mlx_texture_t *texture);
 void			allocate_doors(t_cub *cub, t_game *game);
 t_door			*get_door_data(t_cub *cub, t_rayhit hit);
 
-void			door_update(t_cub *cub, t_game *game);
 void			on_interact_clicked(t_cub *cub);
 
-
 void			draw_sprite(t_cub *cub, t_sprite *sprite);
-t_sprite		sprite_init(double x, double y, t_cub *cub);
+void			sprite_init(t_cub *cub, t_sprite *sprite);
+double			angle_diff(double ang1, double ang2);
+
+void			update_enemies(t_cub *cub, t_game *game);
+void			allocate_enemies(t_cub *cub, t_game *game, t_map *map);
 # pragma endregion
 
 # pragma region raycaster

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:39 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/25 01:37:55 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 01:20:06 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static void	loop_hook(void *param)
 	game->frame_time = (game->current_time - game->preveus_time) / 1000.0;
 	game->frame_rate = 1.0 / game->frame_time;
 	do_handle_keys(cub, game);
-	door_update(cub, game);
 	do_draw_game(cub, game, cub->map_data);
 	do_draw_mini_map(cub, game, cub->map_data);
 }
