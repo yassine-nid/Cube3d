@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:45 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/27 03:55:14 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 22:44:07 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ static void	initial_mlx_load(t_cub *cub, t_game *game)
 	if (mlx_image_to_window(game->mlx, game->minimap_img, 10, 10) < 0)
 		clean_exit(cub, (char *)mlx_strerror(mlx_errno), EXIT_FAILURE);
 	mlx_set_cursor_mode(cub->game->mlx, MLX_MOUSE_DISABLED);
+	cub->game->loose_txt = load_texture(cub, LOOSE_TXT);
+	cub->game->win_txt = load_texture(cub, WIN_TXT);
 }
 
 /// @brief creates mlx_ptr and the image to be used for drawing

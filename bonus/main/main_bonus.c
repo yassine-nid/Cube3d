@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:48:47 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 20:08:26 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/03/27 23:03:36 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	init_game_second(t_game *game)
 	game->enemies = NULL;
 	game->enemy_sprites = NULL;
 	game->trophy_sprite.txt = NULL;
+	game->win_txt = NULL;
+	game->loose_txt = NULL;
 }
 
 /// @brief initialize game varriables
@@ -63,6 +65,9 @@ static void	init_game(t_game *game)
 	game->m_inputs.key_close_game = false;
 	game->m_inputs.change_x = 0;
 	game->m_inputs.old_x = -1;
+	game->win = 0;
+	game->loose = 0;
+	game->stop = 0;
 	init_game_second(game);
 }
 

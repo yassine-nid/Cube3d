@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_tgame_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 01:57:03 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 03:54:47 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 23:05:33 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,12 @@ void	cleanup_game(t_game *game)
 		mlx_delete_image(game->mlx, game->game_img);
 	if (game->mimimap_texture)
 		mlx_delete_texture(game->mimimap_texture);
-	if (game->mlx)
-		mlx_terminate(game->mlx);
+	if (game->win_txt)
+		mlx_delete_texture(game->win_txt);
+	if (game->loose_txt)
+		mlx_delete_texture(game->loose_txt);
 	if (game->trophy_sprite.txt)
 		mlx_delete_texture(game->trophy_sprite.txt);
+	if (game->mlx)
+		mlx_terminate(game->mlx);
 }

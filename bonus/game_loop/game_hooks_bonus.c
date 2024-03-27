@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_hooks_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:52:39 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/03/27 03:55:12 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/03/27 22:49:00 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,16 @@ static void	loop_hook(void *param)
 	do_handle_keys(cub, game);
 	do_draw_game(cub, game, cub->map_data);
 	do_draw_mini_map(cub, game, cub->map_data);
+	if (game->stop)
+	{
+		sleep(3);
+		cleanup(cub);
+		exit(0);
+	}
+	if (game->win)
+		win(cub);
+	if (game->loose)
+		loose(cub);
 }
 
 /// @brief listen to relavent events

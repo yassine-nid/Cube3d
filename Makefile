@@ -6,7 +6,7 @@
 #    By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 08:51:59 by yzirri            #+#    #+#              #
-#    Updated: 2024/03/27 20:09:10 by ynidkouc         ###   ########.fr        #
+#    Updated: 2024/03/27 23:04:03 by ynidkouc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ ANS_START = '\e[1;94m'
 ANS_END = '\e[0m'
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast
-
 # MLX
 NAME_LIBMLX = libmlx
 LIBMLX := ./MLX42
@@ -42,7 +41,8 @@ SRC_BONUS = bonus/main/main_bonus.c bonus/cleanup/clean_exits_bonus.c bonus/util
 	bonus/game_loop/game_draw_sprites_bonus.c \
 	bonus/cleanup/clean_tgame_bonus.c \
 	bonus/game_loop/game_draw_sprites_utils_bonus.c \
-	bonus/game_loop/game_enemies_bonus.c
+	bonus/game_loop/game_enemies_bonus.c \
+	bonus/game_loop/game_win_loose_bonus.c
 
 OBJ_BONUS = $(patsubst %.c, $(OBJ_DIR_BONUS)/%.o, $(SRC_BONUS))
 

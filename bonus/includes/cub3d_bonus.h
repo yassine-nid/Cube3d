@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:53:57 by yzirri            #+#    #+#             */
-/*   Updated: 2024/03/27 04:08:27 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/03/27 23:10:26 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ typedef struct s_rayhit
 // Enemy Sprites Count
 # define DOOR_PATH "./assets/doors/Door_Texture_A.png"
 # define TROPHY_PATH "./assets/sprites/trophy_texture_A.png"
+# define LOOSE_TXT "./assets/end_game/game_over.png"
+# define WIN_TXT "./assets/end_game/win.png"
 # define S_ENEMY_COUNT 8
 # define ENEMY_COLLISION_DISTANCE 0.1
 # define THROPHY_COLLISION_DIST 0.1
@@ -149,6 +151,8 @@ typedef struct s_game
 	mlx_texture_t	*w_txt;
 	mlx_texture_t	*e_txt;
 	mlx_texture_t	*s_txt;
+	mlx_texture_t	*loose_txt;
+	mlx_texture_t	*win_txt;
 	t_door			**doors;
 	mlx_texture_t	*door_text;
 	long long		current_time;
@@ -158,6 +162,9 @@ typedef struct s_game
 	t_enemy			**enemies;
 	mlx_texture_t	**enemy_sprites;
 	t_sprite		trophy_sprite;
+	int				win;
+	int				loose;
+	int				stop;
 }	t_game;
 
 # pragma endregion
@@ -334,6 +341,8 @@ double			angle_diff(double ang1, double ang2);
 
 void			update_enemies(t_cub *cub, t_game *game);
 void			allocate_enemies(t_cub *cub, t_game *game, t_map *map);
+void			loose(t_cub *cub);
+void			win(t_cub *cub);
 # pragma endregion
 
 # pragma region raycaster
